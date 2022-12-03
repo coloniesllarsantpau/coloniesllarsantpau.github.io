@@ -6,7 +6,7 @@ export default {
     host: '0.0.0.0', // default: localhost
   },
   router: {
-    base: '/coloniesllarsantpau/',
+    base: '',
     trailingSlash: false,
     middleware: 'trailingSlashRedirect',
   },
