@@ -60,7 +60,9 @@
         <h2>On som?</h2>
       </section>
     </div>
-    <img src="photos/map.png" />
+    <a href="https://www.google.com/maps/place/Casa+de+col%C3%B2nies+Llar+Sant+Pau/@42.2617445,2.3719776,15z/data=!4m9!3m8!1s0x12a549655a85b9c9:0xd212c5fa84cb4d3b!5m2!4m1!1i2!8m2!3d42.2617445!4d2.3719776!16s%2Fg%2F11b6hqf97h" target="_blank">
+      <img src="photos/map.png" />
+    </a>
   </section>
 </template>
 
