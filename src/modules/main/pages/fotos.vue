@@ -160,12 +160,12 @@ export default class Photos extends Vue {
         src: 'photos/Llar_Sant_Pau_Lliteres.webp',
       },
       {
-        description: 'Infermeria',
+        description: 'Bany infermeria',
         name: 'infermeria',
         src: 'photos/Llar_Sant_Pau_Bany_Infermeria.webp',
       },
       {
-        description: 'Habitació minusvàlids',
+        description: 'Bany adaptat',
         name: 'minusvalids',
         src: 'photos/Llar_Sant_Pau_Bany_Habitacio_Minusvalids.webp',
       },

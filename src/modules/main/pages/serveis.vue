@@ -2,7 +2,7 @@
   <section class="content-wrapper services">
     <app-bar>Serveis</app-bar>
     <sp-text class="services__subtitle font-medium" :importance="6" size="xs"
-      >Durant la vostra estancia podreu gaudir de tot tipus de serveis:</sp-text
+      >Durant la vostra estada podreu gaudir de tot tipus de serveis:</sp-text
     >
     <div class="content main" :class="`content--${$mq}`">
       <div class="services__grid">
@@ -49,7 +49,7 @@
             <div class="services__grid-item__icon">
               <img src="icons/barbacoas.svg" />
             </div>
-            <sp-text class="font-medium" :importance="6" size="xs"> Barbacoas </sp-text>
+            <sp-text class="font-medium" :importance="6" size="xs"> Barbacoes </sp-text>
           </div>
         </div>
         <div>
