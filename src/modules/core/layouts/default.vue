@@ -49,8 +49,8 @@
         <section class="content copyright">
           <nuxt-link :to="{ path: '/' }">© 2021 LLAR SANT PAU</nuxt-link>
           <div class="social">
-            <a href="/"><i class="ph-3x ph-instagram-logo"></i></a>
-            <a href="/"><i class="ph-3x ph-linkedin-logo"></i></a>
+            <a href="https://www.instagram.com/llarsantpau"><i class="ph-3x ph-instagram-logo"></i></a>
+<!--            <a href="/"><i class="ph-3x ph-linkedin-logo"></i></a>-->
           </div>
         </section>
       </footer>
