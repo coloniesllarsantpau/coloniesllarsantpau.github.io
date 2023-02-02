@@ -52,16 +52,16 @@ export default class Trekking extends Vue {
 
           Es tracta d’un antic traçat de ferrocarril anomenat així perquè antigament s’utilitzava
           per transportar el carbó que s’extreia de les mines veïnes d’Ogassa. La ruta passa a uns
-          600 m de la casa de colònies.`,
+          500 m de la casa de colònies.`,
         imageUrl: 'photos/ruta_del_ferro13.png',
       },
       {
         title: 'Vall de Camprodon',
         description: `
           Camprodon és el poble més important de la vall. Degut a la seva natura generosa,
-          Camprodon té una tradició de molts anys dins el món excursionista i del turisme,
-          el seu vell paisatge convida a fer llargues caminades i el seu clima d’abundants
-          neus a l’hivern per els practicants del esquí, fa que sigui un lloc idoni per el turista.`,
+          Camprodon té una tradició de molts anys dins el món excursionista i del turisme.
+          El seu bell paisatge convida a fer llargues caminades i el seu clima d'abundants neus a l'hiver
+          fa que sigui un lloc idoni per la pràctica d'esports de neu.`,
         imageUrl: 'photos/escapada-a-camprodon.png',
       },
       {
@@ -76,12 +76,14 @@ export default class Trekking extends Vue {
         imageUrl: 'photos/vallter-2000-panoramica-ivan-sanz.png',
       },
       {
-        title: 'Molló Parc',
+        title: 'Molló Parc - Parc d\'aventures',
         description: `
           Us proposem passar un dia amb  la família i/o amics envoltats d’animals en semi-llibertat
           en un paratge natural preciós. Una sortida diferent que segur que agradarà a petits i a grans.
           Veniu i passegeu  per la natura veient ossos, marmotes, linx, llops, daines… més de 30 espècies
           d’animals diferents propis del Pirineu Català en el seu entorn natural.
+          També disposa d'un parc parc temàtic que ofereix una gran varietat d'activitats d'aventura al
+          aire lliure per a tota la família.
         `,
         imageUrl: 'photos/c870x524.png',
       },
