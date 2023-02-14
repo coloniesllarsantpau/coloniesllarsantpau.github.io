@@ -76,7 +76,7 @@ export default class Trekking extends Vue {
         imageUrl: 'photos/vallter-2000-panoramica-ivan-sanz.png',
       },
       {
-        title: 'Molló Parc - Parc d\'aventures',
+        title: "Molló Parc - Parc d'aventures",
         description: `
           Us proposem passar un dia amb  la família i/o amics envoltats d’animals en semi-llibertat
           en un paratge natural preciós. Una sortida diferent que segur que agradarà a petits i a grans.

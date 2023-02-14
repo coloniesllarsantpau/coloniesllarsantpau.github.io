@@ -1,5 +1,4 @@
-name: ci
-
+name: Deploy Prod
 
 on:
   push:
@@ -43,7 +42,7 @@ jobs:
 
       - name: Run linter fix 👀
         run: npm run lintfix
-        
+
       - name: Run linter 👀
         run: npm run lint
 
