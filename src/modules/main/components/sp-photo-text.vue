@@ -2,6 +2,12 @@
   <section class="sp-photo-text">
     <sp-text class="sp-photo-text__title font-titles" :importance="4" size="lg">{{ title }}</sp-text>
     <div class="sp-photo-text__image" :style="{ backgroundImage: `url(${imageUrl})` }" />
+    <div class="sp-photo-text__overlay">
+      <div class="sp-photo-text__overlay-background"></div>
+      <div class="sp-photo-text__overlay-text">
+        <slot name="overlay"></slot>
+      </div>
+    </div>
   </section>
 </template>
 
@@ -25,6 +31,18 @@ export default class SpPhotoText extends mixins(ScreenSizes) {
 .sp-photo-text {
   display: flex;
   position: relative;
+  overflow: hidden;
+
+  &:hover,
+  &:focus {
+    .sp-photo-text__image {
+      transform: scale(1.2);
+    }
+
+    .sp-photo-text__overlay {
+      opacity: 1;
+    }
+  }
 
   &__title {
     position: absolute;
@@ -36,6 +54,10 @@ export default class SpPhotoText extends mixins(ScreenSizes) {
     justify-content: center;
     display: flex;
     width: 100%;
+
+    .mobile & {
+      font-size: 3rem;
+    }
   }
 
   &__image {
@@ -43,6 +65,35 @@ export default class SpPhotoText extends mixins(ScreenSizes) {
     height: 750px;
     background-position: center;
     background-size: cover;
+    transition: transform 0.3s;
+  }
+
+  &__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    transition: opacity 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+
+    &-text {
+      z-index: 1;
+    }
+
+    &-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background-color: var(--color-primary);
+      opacity: 0.5;
+    }
   }
 }
 </style>

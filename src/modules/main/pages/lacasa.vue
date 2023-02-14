@@ -2,9 +2,44 @@
   <section class="content-wrapper thehouse">
     <app-bar>La casa</app-bar>
     <div class="thehouse__content">
-      <sp-photo-text title="Planta Baixa" image-url="photos/Llar_Sant_Pau_Entrada.webp"></sp-photo-text>
-      <sp-photo-text title="Primer pis" image-url="photos/Llar_Sant_Pau_Habitacio_28.webp"></sp-photo-text>
-      <sp-photo-text title="Segon pis" image-url="photos/Llar_Sant_Pau_Habitacio_26.webp"></sp-photo-text>
+      <sp-photo-text title="Planta Baixa" image-url="photos/Llar_Sant_Pau_Entrada.webp">
+        <template #overlay>
+          <div class="thehouse__content__overlay">
+            <p>La planta baixa consta d'un <strong>rebedor</strong>, una</p>
+            <p><strong>cuina totalment equipada</strong>, un <strong class="white">lavabo</strong> i</p>
+            <p>una sala amb <strong>tv i vídeo</strong>.</p>
+          </div>
+        </template>
+      </sp-photo-text>
+      <sp-photo-text title="Primer pis" image-url="photos/Llar_Sant_Pau_Habitacio_28.webp">
+        <template #overlay>
+          <div class="thehouse__content__overlay">
+            <p>Al primer pis podem trobar una <storng>infermeria de 4 llits</storng> amb</p>
+            <p>
+              <strong class="white">bany complert</strong>; una <strong>habitació de 4 llits</strong> amb
+              <strong class="white">bany complert</strong>
+            </p>
+            <p>
+              <strong class="white">adaptat per a minusvàlids</strong>; una <strong>sala per a activitats</strong>: un
+            </p>
+            <p>
+              <strong>dormitori gran amb 28 llits</strong> i <strong class="white">lavabo</strong> (accessible per les
+            </p>
+            <p>escales o per la rampa d'accés per a minusvàlids).</p>
+          </div>
+        </template>
+      </sp-photo-text>
+      <sp-photo-text title="Segon pis" image-url="photos/Llar_Sant_Pau_Habitacio_26.webp">
+        <template #overlay>
+          <div class="thehouse__content__overlay">
+            <p>
+              Al segon pis hi ha un <strong>dormitori de 26 llits</strong> i un <strong class="white">lavabo</strong>,
+              juntament
+            </p>
+            <p>amb un <strong>dormitori de 14 llits</strong> i una <strong>sala per a activitats</strong>.</p>
+          </div>
+        </template>
+      </sp-photo-text>
     </div>
     <div class="content" :class="`content--${$mq}`">
       <sp-text-article class="thehouse__description">
@@ -73,6 +108,26 @@ export default class TheHouse extends Vue {
 .thehouse {
   background: var(--color-primary);
   color: white;
+
+  &__content {
+    &__overlay {
+      font-size: 2.75rem;
+      text-align: center;
+
+      .mobile & {
+        font-size: 1.5rem;
+        padding: 0 2rem;
+      }
+
+      strong {
+        color: var(--color-secondary);
+
+        &.white {
+          color: white;
+        }
+      }
+    }
+  }
 
   &__description {
     &-text {
