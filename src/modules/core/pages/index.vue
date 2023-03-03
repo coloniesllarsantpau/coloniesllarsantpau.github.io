@@ -157,7 +157,6 @@ export default class HomePage extends mixins(ScreenSizes) {}
         z-index: 1;
 
         &__text {
-          font-size: 1.5rem;
           padding-bottom: 6rem;
         }
       }
