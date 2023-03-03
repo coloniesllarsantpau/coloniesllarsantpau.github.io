@@ -37,7 +37,8 @@ export default class SpPhotoText extends mixins(ScreenSizes) {
   max-width: 100%;
 
   &:hover,
-  &:focus {
+  &:focus,
+  &:active {
     .sp-photo-text__image {
       transform: scale(1.2);
     }
