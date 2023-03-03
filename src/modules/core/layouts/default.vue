@@ -136,7 +136,7 @@ export default class Default extends mixins(ScreenSizes) {
   }
 
   &.mobile .links {
-    align-items: baseline;
+    align-items: center;
     flex-direction: column;
   }
 
@@ -159,9 +159,9 @@ export default class Default extends mixins(ScreenSizes) {
     &__item {
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      align-items: center;
       flex: 1;
-      padding: 4rem;
+      padding: 2rem 0;
       gap: 1rem;
     }
   }

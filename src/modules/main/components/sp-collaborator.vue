@@ -1,6 +1,6 @@
 <template>
   <section class="sp-collaborator">
-    <sp-text class="sp-collaborator__title font-medium" :importance="4" size="md">{{ item.title }}</sp-text>
+    <sp-text class="sp-collaborator__title font-medium" :importance="4" size="sm">{{ item.title }}</sp-text>
     <div class="sp-collaborator__info">
       <sp-text class="sp-collaborator__info-description font-medium" :importance="5">{{ item.description }}</sp-text>
       <div class="sp-collaborator__info-contact">

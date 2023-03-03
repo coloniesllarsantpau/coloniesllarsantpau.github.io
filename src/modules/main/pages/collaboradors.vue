@@ -71,7 +71,12 @@ export default class Collaborators extends Vue {
     text-align: center;
   }
 
+  .main {
+    justify-content: stretch;
+  }
+
   &__list {
+    flex: 1;
     display: flex;
     flex-direction: column;
     gap: 3rem;

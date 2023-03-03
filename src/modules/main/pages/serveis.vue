@@ -112,6 +112,7 @@ export default class Services extends Vue {
     display: flex;
     flex-direction: column;
     padding-bottom: 0;
+    padding-top: 2rem;
     gap: 7rem;
   }
 
@@ -142,6 +143,32 @@ export default class Services extends Vue {
         img {
           width: 30px;
           height: 30px;
+        }
+      }
+    }
+  }
+
+  .mobile & {
+    .main {
+      padding-top: 6rem;
+      align-items: center;
+    }
+
+    &__grid {
+      row-gap: 1rem;
+      grid-template-columns: initial;
+
+      &-item {
+        align-items: center;
+
+        &__icon {
+          width: 30px;
+          height: 30px;
+
+          img {
+            width: 15px;
+            height: 15px;
+          }
         }
       }
     }

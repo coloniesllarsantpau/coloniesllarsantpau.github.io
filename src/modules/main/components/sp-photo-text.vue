@@ -33,6 +33,9 @@ export default class SpPhotoText extends mixins(ScreenSizes) {
   position: relative;
   overflow: hidden;
 
+  box-sizing: border-box;
+  max-width: 100%;
+
   &:hover,
   &:focus {
     .sp-photo-text__image {
@@ -61,8 +64,11 @@ export default class SpPhotoText extends mixins(ScreenSizes) {
   }
 
   &__image {
+    // width: 100%;
+    // height: 750px;
+
     width: 100%;
-    height: 750px;
+    padding-bottom: 75%;
     background-position: center;
     background-size: cover;
     transition: transform 0.3s;
@@ -83,6 +89,7 @@ export default class SpPhotoText extends mixins(ScreenSizes) {
 
     &-text {
       z-index: 1;
+      font-size: 3vw;
     }
 
     &-background {
