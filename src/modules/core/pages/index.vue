@@ -37,7 +37,9 @@
           <template #left>
             <div class="homepage__lacasa-last__text">
               <p>
-                <span>La Casa de Colònies Llar Sant Pau té una reputació contrastada en aquest sector. </span>
+                <span
+                  >La Casa de Colònies <strong>Llar Sant Pau</strong> té una reputació contrastada en aquest sector.
+                </span>
                 <span>Durant molts anys ha acollit a escoles, casals i grups d’esplai, famílies…</span>
                 <span
                   >Oferim un tracte familiar i proper, així com una
@@ -57,7 +59,7 @@
             <img src="photos/Llar_Sant_Pau_Entorns.webp" />
           </template>
         </sp-text-article>
-        <h2>On som?</h2>
+        <h2 class="on-som">On som?</h2>
       </section>
     </div>
     <a
@@ -117,15 +119,16 @@ export default class HomePage extends mixins(ScreenSizes) {}
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    margin-bottom: 2rem;
+
+    h2 {
+      margin-top: 4rem;
+    }
 
     &-last {
       &__text {
         display: flex;
         flex-direction: column;
         gap: 2rem;
-
-        font-size: 1.5rem;
       }
     }
 
@@ -147,6 +150,8 @@ export default class HomePage extends mixins(ScreenSizes) {}
     }
 
     .desktop & {
+      margin-bottom: -2rem;
+
       &-first {
         margin-bottom: -5rem;
         z-index: 1;

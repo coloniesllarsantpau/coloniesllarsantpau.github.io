@@ -111,11 +111,9 @@ export default class TheHouse extends Vue {
 
   &__content {
     &__overlay {
-      font-size: 2.75rem;
       text-align: center;
 
       .mobile & {
-        font-size: 1.5rem;
         padding: 0 2rem;
       }
 
