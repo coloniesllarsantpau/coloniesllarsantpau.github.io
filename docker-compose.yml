@@ -29,6 +29,13 @@ services:
       - ./tests/validacio/nginx.conf:/etc/nginx/conf.d/default.conf:ro
     profiles: ["validacio"]
 
+  referencia:
+    image: nginx:alpine
+    volumes:
+      - ./.referencia:/usr/share/nginx/html:ro
+      - ./tests/validacio/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    profiles: ["validacio"]
+
   playwright:
     image: mcr.microsoft.com/playwright:v1.49.1-jammy
     user: "${HOST_UID:-1000}:${HOST_GID:-1000}"
@@ -36,9 +43,11 @@ services:
     environment:
       HOME: /tmp
       BASE_URL: http://pages
+      REF_URL: http://referencia
     volumes:
       - ./tests/validacio:/work
     depends_on:
       - pages
+      - referencia
     command: sh -c "npm ci && npx playwright test"
     profiles: ["validacio"]

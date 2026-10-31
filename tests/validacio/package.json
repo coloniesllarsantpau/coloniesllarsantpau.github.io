@@ -1,11 +1,13 @@
 {
   "name": "llar-sant-pau-validacio",
   "private": true,
-  "description": "Proves de validació de la web amb Playwright (independents del package.json de l'arrel)",
+  "description": "Proves de validaci\u00f3 de la web amb Playwright (independents del package.json de l'arrel)",
   "scripts": {
     "test": "playwright test"
   },
   "devDependencies": {
-    "@playwright/test": "1.49.1"
+    "@playwright/test": "1.49.1",
+    "pixelmatch": "5.3.0",
+    "pngjs": "7.0.0"
   }
 }
