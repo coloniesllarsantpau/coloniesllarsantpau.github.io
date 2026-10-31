@@ -7,7 +7,9 @@ Nuxt 2.15 (Vue 2, TypeScript), Tailwind, `@nuxtjs/i18n`, `@nuxtjs/pwa`, Jest. No
 
 ## Comandes
 Tot amb Docker; no cal Node a la màquina.
-- Compilar i servir: veure la secció «Entorn local» (s'hi afegirà quan estigui llest)
+- Compilar: `HOST_UID=$(id -u) HOST_GID=$(id -g) docker compose --profile build run --rm build` (fa `npm ci` i `npm run generate`; el resultat queda a `docs/`)
+- Obrir: `docker compose up -d web` i anar a http://127.0.0.1:8081/ (només escolta a 127.0.0.1)
+- Aturar: `docker compose down`
 - Lint: `npm run lint`
 - Tests: `npm test`
 
