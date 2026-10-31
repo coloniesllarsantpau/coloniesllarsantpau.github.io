@@ -1,0 +1,20 @@
+services:
+  build:
+    build: .
+    image: llar-sant-pau-build
+    user: "${HOST_UID:-1000}:${HOST_GID:-1000}"
+    working_dir: /app
+    environment:
+      HUSKY: "0"
+      HOME: /tmp
+    volumes:
+      - .:/app
+    command: sh -c "npm ci && npm run generate"
+    profiles: ["build"]
+
+  web:
+    image: nginx:alpine
+    ports:
+      - "127.0.0.1:8081:80"
+    volumes:
+      - ./docs:/usr/share/nginx/html:ro
