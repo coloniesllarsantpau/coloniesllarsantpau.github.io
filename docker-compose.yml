@@ -2,20 +2,20 @@ services:
   build:
     build: .
     image: llar-sant-pau-build
-    user: "${HOST_UID:-1000}:${HOST_GID:-1000}"
+    user: '${HOST_UID:-1000}:${HOST_GID:-1000}'
     working_dir: /app
     environment:
-      HUSKY: "0"
+      HUSKY: '0'
       HOME: /tmp
     volumes:
       - .:/app
     command: sh -c "npm ci && npm run generate"
-    profiles: ["build"]
+    profiles: ['build']
 
   web:
     image: nginx:alpine
     ports:
-      - "127.0.0.1:8081:80"
+      - '127.0.0.1:8081:80'
     volumes:
       - ./docs:/usr/share/nginx/html:ro
 
@@ -23,31 +23,33 @@ services:
   pages:
     image: nginx:alpine
     ports:
-      - "127.0.0.1:8082:80"
+      - '127.0.0.1:8082:80'
     volumes:
       - ./docs:/usr/share/nginx/html:ro
       - ./tests/validacio/nginx.conf:/etc/nginx/conf.d/default.conf:ro
-    profiles: ["validacio"]
+    profiles: ['validacio']
 
   referencia:
     image: nginx:alpine
     volumes:
       - ./.referencia:/usr/share/nginx/html:ro
       - ./tests/validacio/nginx.conf:/etc/nginx/conf.d/default.conf:ro
-    profiles: ["validacio"]
+    profiles: ['validacio']
 
   playwright:
     image: mcr.microsoft.com/playwright:v1.49.1-jammy
-    user: "${HOST_UID:-1000}:${HOST_GID:-1000}"
-    working_dir: /work
+    user: '${HOST_UID:-1000}:${HOST_GID:-1000}'
+    working_dir: /tmp
     environment:
       HOME: /tmp
       BASE_URL: http://pages
       REF_URL: http://referencia
     volumes:
-      - ./tests/validacio:/work
+      - ./tests/validacio:/work:ro
     depends_on:
       - pages
       - referencia
-    command: sh -c "npm ci && npx playwright test"
-    profiles: ["validacio"]
+    # Es treballa en una còpia fora del repo: si node_modules fos dins del repo, el build de Nuxt
+    # (que recorre l'arrel del projecte) l'inclouria al bundle.
+    command: sh -c "cp -r /work /tmp/validacio && cd /tmp/validacio && npm ci && npx playwright test"
+    profiles: ['validacio']

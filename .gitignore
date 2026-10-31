@@ -89,3 +89,8 @@ sw.*
 
 # Vim swap files
 *.swp
+
+# Validació (scripts/valida.sh)
+.referencia
+tests/validacio/node_modules
+tests/validacio/resultats

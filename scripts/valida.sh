@@ -33,6 +33,27 @@ check_output() {
   [ "$size_kb" -lt "$MAX_KB" ] || fail "docs/ pesa ${size_kb} KB (límit 1 GB)"
 }
 
+REFERENCE_BRANCH="origin/gh-pages"
+
+extract_reference() {
+  echo "==> Extracció de la referència ($REFERENCE_BRANCH)"
+  git rev-parse --verify --quiet "$REFERENCE_BRANCH" > /dev/null || fail "no existeix $REFERENCE_BRANCH"
+  rm -rf .referencia
+  mkdir .referencia
+  git archive "$REFERENCE_BRANCH" | tar -x -C .referencia
+}
+
+run_browser_tests() {
+  echo "==> Proves amb Playwright"
+  export HOST_UID=$(id -u) HOST_GID=$(id -g)
+  local status=0
+  docker compose --profile validacio run --rm playwright || status=$?
+  docker compose --profile validacio down > /dev/null 2>&1 || true
+  [ "$status" -eq 0 ] || fail "les proves de Playwright han fallat"
+}
+
 [ "${VALIDA_SKIP_BUILD:-0}" = "1" ] || build
 check_output
+extract_reference
+run_browser_tests
 echo "OK: validació correcta"
