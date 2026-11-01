@@ -3,3 +3,6 @@ node_modules
 .output
 docs
 package-lock.json
+
+# Fitxer de tercers copiat tal qual de la web actual
+public/vendor

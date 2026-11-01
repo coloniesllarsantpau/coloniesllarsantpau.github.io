@@ -1,0 +1,48 @@
+@font-face {
+  font-family: 'Aeonik';
+  src:
+    local('Aeonik'),
+    url('/fonts/Aeonik-Regular.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'AeonikMedium';
+  src:
+    local('AeonikMedium'),
+    url('/fonts/Aeonik-Medium.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src:
+    local('Poppins'),
+    url('/fonts/Poppins-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'PoppinsMedium';
+  src:
+    local('PoppinsMedium'),
+    url('/fonts/Poppins-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'QueensTrial';
+  src:
+    local('QueensTrial'),
+    url('/fonts/QueensTrial-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'QueensTrialMedium';
+  src:
+    local('QueensTrialMedium'),
+    url('/fonts/QueensTrial-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'QueensVarTrial';
+  src:
+    local('QueensVarTrial'),
+    url('/fonts/QueensVarTrial.ttf') format('truetype');
+}
