@@ -1,0 +1,97 @@
+@layer base {
+  h2 {
+    font-size: 3.75rem;
+    line-height: 1;
+
+    .mobile & {
+      font-size: 2.25rem;
+      line-height: 2.5rem;
+    }
+  }
+
+  h4 {
+    .mobile & {
+      font-size: 1.875rem;
+      line-height: 2.25rem;
+    }
+  }
+}
+
+.container {
+  overflow: auto;
+  background-color: $gray-lightest;
+}
+
+.content-wrapper {
+  flex-grow: 1;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  overflow: hidden;
+  position: relative;
+
+  &--sm {
+    padding: 2rem 2.5rem;
+  }
+
+  &--md {
+    padding: 3rem 3.75rem;
+  }
+
+  &--lg {
+    padding: 4rem 5rem;
+  }
+
+  &--xl {
+    padding: 5rem 6.25rem;
+  }
+}
+
+.error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+$themes: (
+  red: (
+    'color-primary': $red-base,
+    'color-secondary': $blue-base,
+  ),
+  blue: (
+    'color-primary': $blue-base,
+    'color-secondary': $yellow-base,
+  ),
+  yellow: (
+    'color-primary': $yellow-base,
+    'color-secondary': $blue-base,
+  ),
+  green: (
+    'color-primary': $green-base,
+    'color-secondary': $yellow-base,
+  ),
+);
+
+.color-primary {
+  color: var(--color-primary);
+}
+
+.color-secondary {
+  color: var(--color-secondary);
+}
+
+@each $name, $map in $themes {
+  .theme-llarsantpau--#{'' + $name} {
+    @each $key, $value in $map {
+      --#{$key}: #{$value};
+    }
+  }
+}
+
+.theme-llarsantpau {
+  background-color: var(--color-primary);
+}

@@ -1,9 +1,22 @@
 import { fileURLToPath } from 'node:url';
+import tailwindcss from '@tailwindcss/vite';
 
 export default defineNuxtConfig({
   compatibilityDate: '2026-11-01',
   modules: ['@nuxt/eslint'],
   ssr: false,
+  css: ['~/assets/styles/tailwind.css', '~/assets/styles/main.scss'],
+  vite: {
+    plugins: [tailwindcss()],
+    css: {
+      preprocessorOptions: {
+        scss: {
+          // Variables SCSS disponibles a tots els fitxers (abans, @nuxtjs/style-resources).
+          additionalData: `@use "${fileURLToPath(new URL('./app/assets/styles/variables', import.meta.url))}" as *;\n`,
+        },
+      },
+    },
+  },
   devtools: { enabled: false },
   telemetry: false,
   nitro: {

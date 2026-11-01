@@ -1,0 +1,5 @@
+@use 'sass:color';
+
+@function hexToRGBString($hexColor) {
+  @return '#{color.channel($hexColor, "red", $space: rgb)},#{color.channel($hexColor, "green", $space: rgb)},#{color.channel($hexColor, "blue", $space: rgb)}';
+}

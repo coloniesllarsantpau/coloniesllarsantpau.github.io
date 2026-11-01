@@ -1,0 +1,10 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+@theme {
+  --font-titles: 'QueensTrial', sans-serif;
+  --font-footer: 'QueensVarTrial', sans-serif;
+  --font-medium: 'AeonikMedium', sans;
+  --font-sans: 'Aeonik', sans;
+  --font-mono: 'Poppins', sans;
+}
