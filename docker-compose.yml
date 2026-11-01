@@ -37,7 +37,7 @@ services:
     depends_on:
       permisos-nou:
         condition: service_completed_successfully
-    command: sh -c "npm ci && npx nuxt generate"
+    command: sh -c "npm ci && npm run lint && npm run generate"
     profiles: ['build-nou']
 
   web:

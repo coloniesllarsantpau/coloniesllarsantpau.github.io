@@ -2,6 +2,7 @@ import { fileURLToPath } from 'node:url';
 
 export default defineNuxtConfig({
   compatibilityDate: '2026-11-01',
+  modules: ['@nuxt/eslint'],
   ssr: false,
   devtools: { enabled: false },
   telemetry: false,
