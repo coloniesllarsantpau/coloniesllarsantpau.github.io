@@ -31,4 +31,9 @@ async function loadEverything(page) {
   await page.waitForLoadState('networkidle');
 }
 
-module.exports = { watchPage, loadEverything };
+// Tolerància de la comparació visual: un píxel compta com a diferent si el color s'allunya més
+// de 0,1 (escala de pixelmatch, 0-1) i es tolera fins a un 0,5 % de píxels diferents.
+const PIXEL_THRESHOLD = 0.1;
+const MAX_DIFFERENT_RATIO = 0.005;
+
+module.exports = { watchPage, loadEverything, PIXEL_THRESHOLD, MAX_DIFFERENT_RATIO };

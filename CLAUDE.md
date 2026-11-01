@@ -49,7 +49,9 @@ Tot amb Docker; no cal Node a la màquina.
 Nuxt 4 amb Node 26 (fixats), `ssr: false` i prerenderitzat de les 7 rutes; sortida a `app-nou/docs/`. `node_modules`, `.nuxt` i `.output` viuen en volums Docker amb nom, mai dins del repo.
 
 - Compilar: `HOST_UID=$(id -u) HOST_GID=$(id -g) docker compose --profile build-nou run --rm build-nou` (npm ci, lint i generate)
-- Validar: `scripts/valida.sh --nou` (només les rutes de `tests/validacio/tests/rutes-nou.js`, inicialment cap)
+- Validar: `scripts/valida.sh --nou` (rutes i comparació de pàgina sencera només per a les de `tests/validacio/tests/rutes-nou.js`, inicialment cap; el menú pels 7 enllaços i `layout.spec.js`, que compara la capçalera i el peu amb la referència, sempre)
+- Estils: SCSS amb `sass` i Tailwind 4 (`app/assets/styles/`); les mides de `$mq`, `$device` i `$screen` són mixins SCSS (`variables/_breakpoints.scss`). Sense Google Fonts: les tipografies són a `public/fonts/`.
+- `<html lang>` és `en`, com a la web actual: amb `ca` Chromium canvia la tipografia de reserva de la «·» i el menú no coincideix.
 - La web actual l'ignora (`.prettierignore`, `stylelint.config.js`, `jest.config.js`, `tsconfig.json`, `.dockerignore` i un `ContextReplacementPlugin` a `nuxt.config.ts`: l'`import()` dinàmic de `registerStores` hi inclouria qualsevol `*/index.vue`).
 
 ## Workflow (CI)
