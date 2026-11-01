@@ -44,6 +44,14 @@ Tot amb Docker; no cal Node a la màquina.
 - `tests/validacio/` i `.referencia/` queden fora de `npm run lint` (`.prettierignore`).
 - El contenidor de Playwright treballa en una còpia de `tests/validacio/` dins del contenidor: `node_modules` no pot ser dins del repo perquè el build de Nuxt recorre l'arrel i l'inclouria al bundle.
 
+## Web nova (`app-nou/`)
+
+Nuxt 4 amb Node 26 (fixats), `ssr: false` i prerenderitzat de les 7 rutes; sortida a `app-nou/docs/`. `node_modules`, `.nuxt` i `.output` viuen en volums Docker amb nom, mai dins del repo.
+
+- Compilar: `HOST_UID=$(id -u) HOST_GID=$(id -g) docker compose --profile build-nou run --rm build-nou` (npm ci, lint i generate)
+- Validar: `scripts/valida.sh --nou` (només les rutes de `tests/validacio/tests/rutes-nou.js`, inicialment cap)
+- La web actual l'ignora (`.prettierignore`, `stylelint.config.js`, `jest.config.js`, `tsconfig.json`, `.dockerignore` i un `ContextReplacementPlugin` a `nuxt.config.ts`: l'`import()` dinàmic de `registerStores` hi inclouria qualsevol `*/index.vue`).
+
 ## Workflow (CI)
 
 - Lint del workflow: `docker run --rm -v "$PWD":/r -w /r rhysd/actionlint:1.7.7`
