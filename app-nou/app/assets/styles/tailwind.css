@@ -4,7 +4,11 @@
 @theme {
   --font-titles: 'QueensTrial', sans-serif;
   --font-footer: 'QueensVarTrial', sans-serif;
-  --font-medium: 'AeonikMedium', sans;
   --font-sans: 'Aeonik', sans;
   --font-mono: 'Poppins', sans;
+}
+
+/* `font-medium` també fixa el pes 500; la família AeonikMedium s'hi afegeix com feia Tailwind 3. */
+@utility font-medium {
+  font-family: 'AeonikMedium', sans;
 }

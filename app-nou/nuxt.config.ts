@@ -5,6 +5,19 @@ export default defineNuxtConfig({
   compatibilityDate: '2026-11-01',
   modules: ['@nuxt/eslint'],
   ssr: false,
+  app: {
+    head: {
+      title: 'Llar Sant Pau',
+      // El mateix lang="en" que té la web actual (ve del manifest PWA): amb "ca" Chromium tria una altra
+      // tipografia de reserva per a la «·» de «Col·laboradors» i el menú canvia d'amplada.
+      htmlAttrs: { lang: 'en' },
+      meta: [{ name: 'format-detection', content: 'telephone=no' }],
+      link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        { rel: 'stylesheet', href: '/vendor/phosphor-icons.css' },
+      ],
+    },
+  },
   css: ['~/assets/styles/tailwind.css', '~/assets/styles/main.scss'],
   vite: {
     plugins: [tailwindcss()],
