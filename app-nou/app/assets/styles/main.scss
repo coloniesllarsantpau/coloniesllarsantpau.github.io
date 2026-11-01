@@ -36,20 +36,23 @@
   overflow: hidden;
   position: relative;
 
-  &--sm {
-    padding: 2rem 2.5rem;
-  }
+  // Padding segons la mida de pantalla (abans, una classe content--{mida} amb nuxt-mq).
+  &--mq {
+    @include screen(sm) {
+      padding: 2rem 2.5rem;
+    }
 
-  &--md {
-    padding: 3rem 3.75rem;
-  }
+    @include screen(md) {
+      padding: 3rem 3.75rem;
+    }
 
-  &--lg {
-    padding: 4rem 5rem;
-  }
+    @include screen(lg) {
+      padding: 4rem 5rem;
+    }
 
-  &--xl {
-    padding: 5rem 6.25rem;
+    @include screen(xl) {
+      padding: 5rem 6.25rem;
+    }
   }
 }
 
