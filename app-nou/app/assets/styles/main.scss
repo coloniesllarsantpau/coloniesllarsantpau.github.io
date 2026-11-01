@@ -5,14 +5,14 @@
     font-size: 3.75rem;
     line-height: 1;
 
-    .mobile & {
+    @include small-screen {
       font-size: 2.25rem;
       line-height: 2.5rem;
     }
   }
 
   h4 {
-    .mobile & {
+    @include small-screen {
       font-size: 1.875rem;
       line-height: 2.25rem;
     }

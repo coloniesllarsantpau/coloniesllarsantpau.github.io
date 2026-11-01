@@ -1,0 +1,62 @@
+// Mides que abans venien de nuxt-mq (xs 450, sm 786, md 1024, lg 1280, xl) i de vue-screen (amplada < 1024).
+// Cada interval acaba un píxel abans del següent: xs < 450, sm 450-785, md 786-1023, lg 1024-1279, xl >= 1280.
+$breakpoint-xs: 450px;
+$breakpoint-sm: 786px;
+$breakpoint-md: 1024px;
+$breakpoint-lg: 1280px;
+
+$breakpoint-ranges: (
+  xs: (
+    null,
+    $breakpoint-xs - 1,
+  ),
+  sm: (
+    $breakpoint-xs,
+    $breakpoint-sm - 1,
+  ),
+  md: (
+    $breakpoint-sm,
+    $breakpoint-md - 1,
+  ),
+  lg: (
+    $breakpoint-md,
+    $breakpoint-lg - 1,
+  ),
+  xl: (
+    $breakpoint-lg,
+    null,
+  ),
+);
+
+@mixin screen($name) {
+  $range: map-get($breakpoint-ranges, $name);
+  $min: nth($range, 1);
+  $max: nth($range, 2);
+
+  @if $min and $max {
+    @media (min-width: $min) and (max-width: $max) {
+      @content;
+    }
+  } @else if $min {
+    @media (min-width: $min) {
+      @content;
+    }
+  } @else {
+    @media (max-width: $max) {
+      @content;
+    }
+  }
+}
+
+// Pantalla petita (menú mòbil): menys de 1024 px.
+@mixin small-screen {
+  @media (max-width: $breakpoint-md - 1) {
+    @content;
+  }
+}
+
+@mixin large-screen {
+  @media (min-width: $breakpoint-md) {
+    @content;
+  }
+}
