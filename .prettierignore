@@ -107,3 +107,6 @@ tests/validacio
 
 # Eines baixades (act)
 .eines
+
+# Web nova (app-nou/): té la seva pròpia configuració
+app-nou

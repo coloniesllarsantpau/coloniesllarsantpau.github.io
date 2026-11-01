@@ -1,3 +1,4 @@
+import { ContextReplacementPlugin } from 'webpack';
 import i18n from './config/i18n';
 
 export default {
@@ -144,6 +145,18 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    // L'import() dinàmic de registerStores fa que webpack inclogui qualsevol */index.vue de l'arrel,
+    // també els d'app-nou/ (la web nova). Aquí es descarten abans de crear el context.
+    extend(config: any) {
+      config.plugins.push(
+        new ContextReplacementPlugin(/./, (result: any) => {
+          const source = result.regExp && result.regExp.source;
+          if (source && result.regExp.test('./app-nou/pages/index')) {
+            result.regExp = new RegExp(source.replace(/^\^/, '^(?!\\.\\/app-nou\\/)'));
+          }
+        }),
+      );
+    },
     loaders: {
       scss: { sourceMap: false },
     },
