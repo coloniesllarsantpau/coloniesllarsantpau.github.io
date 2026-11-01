@@ -9,7 +9,7 @@ services:
       HOME: /tmp
     volumes:
       - .:/app
-    command: sh -c "npm ci && npm run generate"
+    command: sh -c "npm ci && npm run lint && npm test && npm run generate"
     profiles: ['build']
 
   web:

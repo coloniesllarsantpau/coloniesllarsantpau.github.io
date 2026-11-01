@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Validació de la web: build net amb Docker i comprovacions de la sortida a docs/.
+# Validació de la web: build net amb Docker (npm ci, lint, tests i generate) i comprovacions de la sortida a docs/.
 set -euo pipefail
 
 cd "$(dirname "$0")/.."

@@ -10,6 +10,7 @@ module.exports = {
     '^.+\\.js$': 'babel-jest',
     '.*\\.(vue)$': 'vue-jest',
   },
+  testPathIgnorePatterns: ['/node_modules/', '/tests/validacio/'],
   collectCoverage: true,
   collectCoverageFrom: ['<rootDir>/src/**/components/**/*.vue', '<rootDir>/src/**/pages/**/*.vue'],
   testEnvironment: 'jsdom',
