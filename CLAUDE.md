@@ -43,3 +43,9 @@ Tot amb Docker; no cal Node a la màquina.
 - Tolerància visual: píxel diferent si el color s'allunya més de 0,1 (pixelmatch) i fins a un 0,5 % de píxels diferents; la mida de la pàgina ha de coincidir. Animacions aturades.
 - `tests/validacio/` i `.referencia/` queden fora de `npm run lint` (`.prettierignore`).
 - El contenidor de Playwright treballa en una còpia de `tests/validacio/` dins del contenidor: `node_modules` no pot ser dins del repo perquè el build de Nuxt recorre l'arrel i l'inclouria al bundle.
+
+## Workflow (CI)
+
+- Lint del workflow: `docker run --rm -v "$PWD":/r -w /r rhysd/actionlint:1.7.7`
+- Executar-lo en local: `.eines/act/act pull_request -P ubuntu-latest=ghcr.io/catthehacker/ubuntu:act-latest`
+- `act` (v0.2.94) es baixa a `.eines/` (ignorat per git; `valida.sh` esborra `.referencia/`, per això no hi va). Només amb l'esdeveniment `pull_request`, perquè el pas Deploy quedi omès, i mai amb cap token real.

@@ -104,3 +104,6 @@ sw.*
 tests/validacio/node_modules
 tests/validacio/resultats
 tests/validacio
+
+# Eines baixades (act)
+.eines
