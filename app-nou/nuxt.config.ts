@@ -42,6 +42,8 @@ export default defineNuxtConfig({
     },
     prerender: {
       routes: ['/', '/lacasa', '/serveis', '/excursions', '/fotos', '/collaboradors', '/contacte'],
+      // La web actual no té 404.html: una ruta inexistent mostra la pàgina 404 de Pages.
+      ignore: ['/404.html'],
     },
   },
 });

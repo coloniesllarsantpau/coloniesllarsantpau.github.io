@@ -76,6 +76,9 @@ services:
       PW_ARGS: '${PW_ARGS:-}'
     volumes:
       - ./tests/validacio:/work:ro
+      # Per a la comparació de fitxers públics (fitxers.spec.js).
+      - ${DOCS_DIR:-./docs}:/fitxers/nova:ro
+      - ./.referencia:/fitxers/referencia:ro
     depends_on:
       - pages
       - referencia

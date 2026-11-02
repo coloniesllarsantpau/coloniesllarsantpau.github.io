@@ -63,7 +63,7 @@ run_browser_tests() {
   echo "==> Proves amb Playwright"
   export HOST_UID=$(id -u) HOST_GID=$(id -g) DOCS_DIR="./$DOCS"
   # Web nova: rutes i visual només de les ja migrades; menú i layout (capçalera i peu) de les 7 rutes.
-  [ "$NOU" -eq 0 ] || export VALIDA_NOU=1 PW_ARGS="--pass-with-no-tests rutes.spec.js visual.spec.js navegacio.spec.js layout.spec.js efectes.spec.js fotos.spec.js text.spec.js enllacos.spec.js"
+  [ "$NOU" -eq 0 ] || export VALIDA_NOU=1 PW_ARGS="--pass-with-no-tests rutes.spec.js visual.spec.js navegacio.spec.js layout.spec.js efectes.spec.js fotos.spec.js text.spec.js enllacos.spec.js fitxers.spec.js"
   local status=0
   docker compose --profile validacio run --rm playwright || status=$?
   # També el profile build-nou: si no, el contenidor permisos-nou queda lligat a una xarxa esborrada i la següent execució falla.
