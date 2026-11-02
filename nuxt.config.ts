@@ -11,7 +11,10 @@ export default defineNuxtConfig({
       // El mateix lang="en" que té la web publicada (venia del manifest PWA): amb "ca" Chromium tria una altra
       // tipografia de reserva per a la «·» de «Col·laboradors» i el menú canvia d'amplada.
       htmlAttrs: { lang: 'en' },
-      meta: [{ name: 'format-detection', content: 'telephone=no' }],
+      meta: [
+        { name: 'format-detection', content: 'telephone=no' },
+        { name: 'referrer', content: 'strict-origin-when-cross-origin' },
+      ],
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
         { rel: 'stylesheet', href: '/vendor/phosphor-icons.css' },
