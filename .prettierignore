@@ -73,9 +73,8 @@ typings/
 
 # nuxt.js build output
 .nuxt
-
-# plugins
-src/plugins
+.output
+.data
 
 # Nuxt generate
 dist
@@ -108,5 +107,6 @@ tests/validacio
 # Eines baixades (act)
 .eines
 
-# Web nova (app-nou/): té la seva pròpia configuració
-app-nou
+# Lockfile i fitxer de tercers copiat tal qual
+package-lock.json
+public/vendor

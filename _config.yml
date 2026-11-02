@@ -1,9 +1,0 @@
-##########
-# URL VARIABLES
-#
-# site domain, full URL to the production location of your collection
-url: https://coloniesllarsantpau.github.io
-# path to location on the domain if necessary e.g. /digital/hjccc
-baseurl:
-# location of code, the full url to your github repository
-source-code: https://github.com/coloniesllarsantpau/coloniesllarsantpau.github.io

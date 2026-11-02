@@ -1,170 +1,47 @@
-import { ContextReplacementPlugin } from 'webpack';
-import i18n from './config/i18n';
+import { fileURLToPath } from 'node:url';
+import tailwindcss from '@tailwindcss/vite';
 
-export default {
-  server: {
-    port: 8080, // default: 3000
-    host: '0.0.0.0', // default: localhost
-  },
-  router: {
-    base: '',
-    trailingSlash: false,
-    middleware: 'trailingSlashRedirect',
-  },
-
+export default defineNuxtConfig({
+  compatibilityDate: '2026-11-01',
+  modules: ['@nuxt/eslint'],
   ssr: false,
-
-  // Global page headers: https://go.nuxtjs.dev/config-head
-  head: {
-    title: 'Llar Sant Pau',
-    meta: [
-      { charset: 'utf-8' },
-      {
-        name: 'viewport',
-        content: 'width=device-width, initial-scale=1',
-      },
-      {
-        hid: 'description',
-        name: 'description',
-        content: '',
-      },
-      {
-        name: 'format-detection',
-        content: 'telephone=no',
-      },
-    ],
-    link: [
-      {
-        rel: 'icon',
-        type: 'image/x-icon',
-        href: '/favicon.ico',
-      },
-    ],
-  },
-  generate: {
-    dir: 'docs',
-  },
-
-  /* nuxt.config.js */
-  // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ['styles/main.scss', 'static/vendor/phosphor-icons.css', 'hooper/dist/hooper.css'],
-
-  // Source directory
-  srcDir: 'src/',
-
-  dir: {
-    components: 'modules/core/components',
-    layouts: 'modules/core/layouts',
-    pages: 'modules/core/pages',
-    store: 'modules/core/store',
-    middleware: 'modules/core/middleware',
-  },
-
-  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-    { src: '~/plugins/registerServices.ts' },
-    { src: '~/plugins/vue-screen.ts', ssr: true },
-    { src: '~/plugins/vue-awesome-swiper.ts', ssr: false },
-  ],
-
-  // Auto import components: https://go.nuxtjs.dev/config-components
-  components: ['@/modules/core/components'],
-
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [
-    '@nuxtjs/google-fonts',
-    // https://go.nuxtjs.dev/typescript
-    '@nuxt/typescript-build',
-    // https://go.nuxtjs.dev/stylelint
-    '@nuxtjs/stylelint-module',
-    '@nuxt/postcss8',
-    '@nuxtjs/svg',
-    '@nuxtjs/style-resources',
-    '@nuxtjs/device',
-    ['nuxt-mq'],
-  ],
-
-  device: {
-    refreshOnResize: true,
-  },
-
-  mq: {
-    defaultBreakpoint: 'lg',
-    breakpoints: {
-      xs: 450,
-      sm: 786,
-      md: 1024,
-      lg: 1280,
-      xl: Infinity,
+  app: {
+    head: {
+      title: 'Llar Sant Pau',
+      // El mateix lang="en" que té la web publicada (venia del manifest PWA): amb "ca" Chromium tria una altra
+      // tipografia de reserva per a la «·» de «Col·laboradors» i el menú canvia d'amplada.
+      htmlAttrs: { lang: 'en' },
+      meta: [{ name: 'format-detection', content: 'telephone=no' }],
+      link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        { rel: 'stylesheet', href: '/vendor/phosphor-icons.css' },
+      ],
     },
   },
-
-  googleFonts: {
-    preload: true,
-    families: {
-      Quicksand: [400, 700],
-      'Work+Sans': [300, 400, 500],
-    },
-  },
-
-  loading: false,
-
-  purgeCSS: {
-    enabled: true,
-  },
-
-  // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [
-    '@nuxtjs/i18n',
-    '@nuxt/image',
-    // https://go.nuxtjs.dev/pwa
-    '@nuxtjs/pwa',
-    [
-      '~/plugins/registerModules.ts',
-      {
-        modules: ['main'],
-        config: {
-          srcDir: 'src',
+  css: ['~/assets/styles/tailwind.css', '~/assets/styles/main.scss'],
+  vite: {
+    plugins: [tailwindcss()],
+    css: {
+      preprocessorOptions: {
+        scss: {
+          // Variables SCSS disponibles a tots els fitxers (abans, @nuxtjs/style-resources).
+          additionalData: `@use "${fileURLToPath(new URL('./app/assets/styles/variables', import.meta.url))}" as *;\n`,
         },
       },
-    ],
-  ],
-
-  i18n,
-
-  styleResources: {
-    scss: ['styles/variables.scss'],
-  },
-
-  // PWA module configuration: https://go.nuxtjs.dev/pwa
-  pwa: {
-    manifest: {
-      lang: 'en',
     },
   },
-
-  // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
-    // L'import() dinàmic de registerStores fa que webpack inclogui qualsevol */index.vue de l'arrel,
-    // també els d'app-nou/ (la web nova). Aquí es descarten abans de crear el context.
-    extend(config: any) {
-      config.plugins.push(
-        new ContextReplacementPlugin(/./, (result: any) => {
-          const source = result.regExp && result.regExp.source;
-          if (source && result.regExp.test('./app-nou/pages/index')) {
-            result.regExp = new RegExp(source.replace(/^\^/, '^(?!\\.\\/app-nou\\/)'));
-          }
-        }),
-      );
+  devtools: { enabled: false },
+  telemetry: false,
+  nitro: {
+    preset: 'static',
+    output: {
+      // La mateixa carpeta de sortida que abans (docs/): és el publish_dir del workflow.
+      publicDir: fileURLToPath(new URL('./docs', import.meta.url)),
     },
-    loaders: {
-      scss: { sourceMap: false },
-    },
-    postcss: {
-      plugins: {
-        tailwindcss: {},
-        autoprefixer: {},
-      },
+    prerender: {
+      routes: ['/', '/lacasa', '/serveis', '/excursions', '/fotos', '/collaboradors', '/contacte'],
+      // Sense 404.html: una ruta inexistent mostra la pàgina 404 de Pages.
+      ignore: ['/404.html'],
     },
   },
-};
+});
