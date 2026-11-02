@@ -14,6 +14,7 @@ function buildCsp(html: string): string {
     `script-src 'self' ${hashes.join(' ')}`,
     "style-src 'self' 'unsafe-inline'",
     "img-src 'self' data:",
+    "font-src 'self' data:",
     "object-src 'none'",
     "base-uri 'self'",
     "form-action 'self'",
