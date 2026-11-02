@@ -51,4 +51,8 @@ async function openContext(browser, testInfo, baseURL) {
   });
 }
 
-module.exports = { watchPage, loadEverything, openContext, REF_URL, PIXEL_THRESHOLD, MAX_DIFFERENT_RATIO };
+// Carpetes de la sortida nova i de la referència (muntades a docker-compose.yml).
+const CURRENT_DIR = '/fitxers/nova';
+const REFERENCE_DIR = '/fitxers/referencia';
+
+module.exports = { CURRENT_DIR, REFERENCE_DIR, watchPage, loadEverything, openContext, REF_URL, PIXEL_THRESHOLD, MAX_DIFFERENT_RATIO };

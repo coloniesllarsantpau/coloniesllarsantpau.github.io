@@ -1,5 +1,8 @@
 const { defineConfig } = require('@playwright/test');
 
+// Perquè context.route també intercepti les peticions dels service workers (sw-retirada.spec.js).
+process.env.PW_EXPERIMENTAL_SERVICE_WORKER_NETWORK_EVENTS ||= '1';
+
 const baseURL = process.env.BASE_URL || 'http://pages';
 
 module.exports = defineConfig({

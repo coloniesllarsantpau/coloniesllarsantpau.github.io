@@ -3,10 +3,9 @@ const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 
-// Compara la sortida amb la referència (carpetes muntades a docker-compose.yml).
+const { CURRENT_DIR, REFERENCE_DIR } = require('./helpers');
 
-const CURRENT_DIR = '/fitxers/nova';
-const REFERENCE_DIR = '/fitxers/referencia';
+// Compara la sortida amb la referència (carpetes muntades a docker-compose.yml).
 
 // Fitxers generats pel build, que no es comparen.
 const GENERATED = [/^_nuxt\//, /^sw\.js$/];
