@@ -1,5 +1,24 @@
+import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import tailwindcss from '@tailwindcss/vite';
+
+// CSP per <meta> (Pages no deixa posar capçaleres). Els scripts en línia de Nuxt (importmap i window.__NUXT__)
+// canvien a cada build: se'n calcula el hash a l'HTML generat en lloc de permetre 'unsafe-inline'.
+// frame-ancestors, report-uri i sandbox no funcionen per <meta>.
+function buildCsp(html: string): string {
+  const hashes = [...html.matchAll(/<script(?![^>]*\ssrc=)[^>]*>([\s\S]*?)<\/script>/g)]
+    .filter((match) => !/type="application\/json"/.test(match[0]))
+    .map((match) => `'sha256-${createHash('sha256').update(match[1]).digest('base64')}'`);
+  return [
+    "default-src 'self'",
+    `script-src 'self' ${hashes.join(' ')}`,
+    "style-src 'self' 'unsafe-inline'",
+    "img-src 'self' data:",
+    "object-src 'none'",
+    "base-uri 'self'",
+    "form-action 'self'",
+  ].join('; ');
+}
 
 export default defineNuxtConfig({
   compatibilityDate: '2026-11-01',
@@ -35,6 +54,16 @@ export default defineNuxtConfig({
   },
   devtools: { enabled: false },
   telemetry: false,
+  hooks: {
+    'nitro:init': (nitro) => {
+      nitro.hooks.hook('prerender:generate', (route) => {
+        if (!route.fileName?.endsWith('.html') || !route.contents) return;
+        const csp = `<meta http-equiv="Content-Security-Policy" content="${buildCsp(route.contents)}">`;
+        // Just després de <meta charset>, abans de qualsevol script.
+        route.contents = route.contents.replace(/(<meta charset="utf-8">)/, `$1${csp}`);
+      });
+    },
+  },
   nitro: {
     preset: 'static',
     output: {
