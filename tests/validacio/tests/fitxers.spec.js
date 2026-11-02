@@ -3,8 +3,7 @@ const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 
-// Només per a app-nou/: compara la sortida amb la referència (carpetes muntades a docker-compose.yml).
-test.skip(!process.env.VALIDA_NOU, 'només amb scripts/valida.sh --nou');
+// Compara la sortida amb la referència (carpetes muntades a docker-compose.yml).
 
 const CURRENT_DIR = '/fitxers/nova';
 const REFERENCE_DIR = '/fitxers/referencia';

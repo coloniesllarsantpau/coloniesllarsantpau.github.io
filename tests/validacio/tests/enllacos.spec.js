@@ -1,9 +1,6 @@
 const { test, expect } = require('@playwright/test');
-const routes = require('./rutes-totes');
+const routes = require('./routes');
 const { loadEverything, openContext, REF_URL } = require('./helpers');
-
-// Només per a app-nou/: la web actual és la mateixa que la referència.
-test.skip(!process.env.VALIDA_NOU, 'només amb scripts/valida.sh --nou');
 
 // Enllaços, marcs i formularis de la pàgina, en ordre i amb l'atribut tal com és al DOM (mailto:, tel:, Instagram, Google Maps...).
 async function destinations(browser, testInfo, base, route) {

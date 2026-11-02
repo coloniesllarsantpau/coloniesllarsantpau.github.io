@@ -1,9 +1,6 @@
 const { test, expect } = require('@playwright/test');
-const routes = require('./rutes-totes');
+const routes = require('./routes');
 const { loadEverything, openContext, REF_URL } = require('./helpers');
-
-// Només per a app-nou/: la web actual és la mateixa que la referència.
-test.skip(!process.env.VALIDA_NOU, 'només amb scripts/valida.sh --nou');
 
 // Títol i text visible de la pàgina, línia a línia i sense espais de més.
 async function visibleText(browser, testInfo, base, route) {

@@ -1,19 +1,11 @@
 #!/usr/bin/env bash
-# Validació de la web: build net amb Docker (npm ci, lint, tests i generate) i comprovacions de la sortida a docs/.
-# Amb --nou es valida app-nou/ (lint, generate, sortida a app-nou/docs/ i només les rutes de tests/validacio/tests/rutes-nou.js).
+# Validació de la web: build net amb Docker (npm ci, lint i generate), comprovacions de la sortida a docs/ i proves
+# de Playwright contra la referència (origin/gh-pages).
 set -euo pipefail
 
 cd "$(dirname "$0")/.."
 
-NOU=0
-case "${1:-}" in
-  "") ;;
-  --nou) NOU=1 ;;
-  *) echo "Ús: $0 [--nou]" >&2; exit 2 ;;
-esac
-
 DOCS="docs"
-[ "$NOU" -eq 0 ] || DOCS="app-nou/docs"
 
 DOMAIN="coloniesllarsantpau.com"
 ROUTES=(lacasa serveis excursions fotos collaboradors contacte)
@@ -27,12 +19,7 @@ fail() {
 build() {
   echo "==> Build net"
   rm -rf "$DOCS"
-  if [ "$NOU" -eq 1 ]; then
-    # npm ci, lint i generate d'app-nou/
-    HOST_UID=$(id -u) HOST_GID=$(id -g) docker compose --profile build-nou run --rm build-nou
-  else
-    HOST_UID=$(id -u) HOST_GID=$(id -g) docker compose --profile build run --rm build
-  fi
+  HOST_UID=$(id -u) HOST_GID=$(id -g) docker compose --profile build run --rm build
 }
 
 check_output() {
@@ -61,13 +48,10 @@ extract_reference() {
 
 run_browser_tests() {
   echo "==> Proves amb Playwright"
-  export HOST_UID=$(id -u) HOST_GID=$(id -g) DOCS_DIR="./$DOCS"
-  # Web nova: rutes i visual només de les ja migrades; menú i layout (capçalera i peu) de les 7 rutes.
-  [ "$NOU" -eq 0 ] || export VALIDA_NOU=1 PW_ARGS="--pass-with-no-tests rutes.spec.js visual.spec.js navegacio.spec.js layout.spec.js efectes.spec.js fotos.spec.js text.spec.js enllacos.spec.js fitxers.spec.js url.spec.js"
+  export HOST_UID=$(id -u) HOST_GID=$(id -g)
   local status=0
   docker compose --profile validacio run --rm playwright || status=$?
-  # També el profile build-nou: si no, el contenidor permisos-nou queda lligat a una xarxa esborrada i la següent execució falla.
-  docker compose --profile validacio --profile build-nou down > /dev/null 2>&1 || true
+  docker compose --profile validacio down > /dev/null 2>&1 || true
   [ "$status" -eq 0 ] || fail "les proves de Playwright han fallat"
 }
 

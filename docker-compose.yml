@@ -25,7 +25,7 @@ services:
     ports:
       - '127.0.0.1:8082:80'
     volumes:
-      - ${DOCS_DIR:-./docs}:/usr/share/nginx/html:ro
+      - ./docs:/usr/share/nginx/html:ro
       - ./tests/validacio/nginx.conf:/etc/nginx/conf.d/default.conf:ro
     profiles: ['validacio']
 
@@ -44,17 +44,15 @@ services:
       HOME: /tmp
       BASE_URL: http://pages
       REF_URL: http://referencia
-      VALIDA_NOU: '${VALIDA_NOU:-}'
-      PW_ARGS: '${PW_ARGS:-}'
     volumes:
       - ./tests/validacio:/work:ro
       # Per a la comparació de fitxers públics (fitxers.spec.js).
-      - ${DOCS_DIR:-./docs}:/fitxers/nova:ro
+      - ./docs:/fitxers/nova:ro
       - ./.referencia:/fitxers/referencia:ro
     depends_on:
       - pages
       - referencia
-    # Es treballa en una còpia fora del repo: si node_modules fos dins del repo, el build de Nuxt
-    # (que recorre l'arrel del projecte) l'inclouria al bundle.
-    command: sh -c "cp -r /work /tmp/validacio && cd /tmp/validacio && npm ci && npx playwright test $$PW_ARGS"
+    # Es treballa en una còpia dins del contenidor: tests/validacio/ es munta només de lectura i el seu
+    # node_modules no queda dins del repo.
+    command: sh -c "cp -r /work /tmp/validacio && cd /tmp/validacio && npm ci && npx playwright test"
     profiles: ['validacio']

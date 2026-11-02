@@ -1,5 +1,5 @@
 const { test, expect } = require('@playwright/test');
-const routes = require('./rutes-totes');
+const routes = require('./routes');
 const { watchPage } = require('./helpers');
 
 // Entra a cada ruta des del menú i torna a l'inici al final. En mòbil el logo del menú

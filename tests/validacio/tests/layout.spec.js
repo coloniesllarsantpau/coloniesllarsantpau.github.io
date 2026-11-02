@@ -1,12 +1,11 @@
 const { test, expect } = require('@playwright/test');
 const { PNG } = require('pngjs');
 const pixelmatch = require('pixelmatch');
-const routes = require('./rutes-totes');
+const routes = require('./routes');
 const { loadEverything, PIXEL_THRESHOLD, MAX_DIFFERENT_RATIO } = require('./helpers');
 
-// Només per a app-nou/: el contingut de les pàgines encara no hi és, així que no es compara la
-// pàgina sencera (visual.spec.js) sinó només la capçalera (menú) i el peu del layout.
-test.skip(!process.env.VALIDA_NOU, 'només amb scripts/valida.sh --nou');
+// Només la capçalera (menú) i el peu del layout, amb el contingut de les pàgines amagat; la pàgina
+// sencera es compara a visual.spec.js.
 
 const refURL = process.env.REF_URL || 'http://referencia';
 // `align`: per què les alçades poden diferir 1 px (la posició fraccionària del peu a la referència,
@@ -57,7 +56,7 @@ for (const route of routes) {
     const current = await capture(browser, options, new URL(route, baseURL).href);
     const reference = await capture(browser, options, new URL(route, refURL).href);
 
-    // A l'escriptori de la portada el menú se superposa a la foto del contingut, que encara no és a app-nou/.
+    // A l'escriptori de la portada el menú se superposa a la foto del contingut, que aquí és amagat.
     const desktop = options.viewport.width >= 1024;
 
     for (const [name, { align }] of Object.entries(parts)) {

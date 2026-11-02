@@ -1,5 +1,5 @@
 const { test, expect } = require('@playwright/test');
-const routes = require('./rutes-totes');
+const routes = require('./routes');
 const { watchPage, openContext, REF_URL } = require('./helpers');
 
 // Comportament d'URL: Pages fa 301 de /ruta a /ruta/ i, un cop carregada, la web porta el navegador a /ruta.
