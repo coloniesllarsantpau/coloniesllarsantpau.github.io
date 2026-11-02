@@ -36,4 +36,19 @@ async function loadEverything(page) {
 const PIXEL_THRESHOLD = 0.1;
 const MAX_DIFFERENT_RATIO = 0.005;
 
-module.exports = { watchPage, loadEverything, PIXEL_THRESHOLD, MAX_DIFFERENT_RATIO };
+// Les dues webs que es comparen: la que es valida i la referència.
+const REF_URL = process.env.REF_URL || 'http://referencia';
+
+// Obre una pàgina nova amb les mateixes opcions que el projecte de Playwright (mòbil o escriptori).
+async function openContext(browser, testInfo, baseURL) {
+  return browser.newContext({
+    baseURL,
+    viewport: testInfo.project.use.viewport,
+    hasTouch: testInfo.project.use.hasTouch,
+    serviceWorkers: 'block',
+    reducedMotion: 'reduce',
+    locale: 'ca-ES',
+  });
+}
+
+module.exports = { watchPage, loadEverything, openContext, REF_URL, PIXEL_THRESHOLD, MAX_DIFFERENT_RATIO };
