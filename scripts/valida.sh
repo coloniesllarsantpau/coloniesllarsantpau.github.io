@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Validació de la web: build net amb Docker (npm ci, lint i generate), comprovacions de la sortida a docs/ i proves
-# de Playwright contra la referència (origin/gh-pages).
+# de Playwright contra la referència (origin/gh-pages), incloses les de retirada del service worker antic
+# (tests/validacio/tests/sw-*.spec.js).
 set -euo pipefail
 
 cd "$(dirname "$0")/.."

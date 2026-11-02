@@ -45,8 +45,9 @@ El projecte no té tests unitaris: les proves són les de `tests/validacio/`.
 - Executar: `scripts/valida.sh` (amb `VALIDA_SKIP_BUILD=1` s'aprofita el `docs/` existent).
 - Referència: `origin/gh-pages` extret amb `git archive` a `.referencia/` (ignorat per git; no es versiona cap captura).
 - Servidors: nginx (`tests/validacio/nginx.conf`) imita Pages: `/ruta` fa 301 a `/ruta/`, una ruta inexistent dona 404. No es fa cap petició a producció.
-- Proves (`tests/validacio/`, amb `package.json` propi i Playwright 1.49.1 fixat a la imatge): per ruta i en mòbil i escriptori, codi 200, sense errors de consola, sense recursos propis fallats i amb imatges carregades; navegació pel menú; comparació visual amb la referència.
+- Proves (`tests/validacio/`, amb `package.json` propi i Playwright 1.49.1 fixat a la imatge): per ruta i en mòbil i escriptori, codi 200, sense errors de consola, sense recursos propis fallats i amb imatges carregades; navegació pel menú; comparació visual amb la referència; retirada del service worker antic (`sw-*.spec.js`).
 - Tolerància visual: píxel diferent si el color s'allunya més de 0,1 (pixelmatch) i fins a un 0,5 % de píxels diferents; la mida de la pàgina ha de coincidir. Animacions aturades.
+- Les proves `sw-*.spec.js` permeten service workers (la resta els bloquegen) i serveixen la sortida des d'un servidor a `localhost` dins la prova, perquè `http://pages` no és un context segur. El Workbox del CDN es substitueix per una còpia mínima local.
 - `tests/validacio/` i `.referencia/` queden fora de `npm run lint` (`.prettierignore` i `eslint.config.mjs`).
 - El contenidor de Playwright treballa en una còpia de `tests/validacio/` dins del contenidor: el directori es munta només de lectura i el seu `node_modules` no queda dins del repo.
 
