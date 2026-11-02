@@ -11,6 +11,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: deploy-prod
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ${{ matrix.os }}
