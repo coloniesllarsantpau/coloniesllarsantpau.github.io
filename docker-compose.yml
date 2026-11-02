@@ -1,44 +1,16 @@
 services:
   build:
     build: .
-    image: llar-sant-pau-build
+    # Amb la versió de Node a l'etiqueta: amb una etiqueta fixa, compose reaprofitaria una imatge antiga sense reconstruir-la.
+    image: llar-sant-pau-build:26.13.0
     user: '${HOST_UID:-1000}:${HOST_GID:-1000}'
     working_dir: /app
     environment:
-      HUSKY: '0'
       HOME: /tmp
     volumes:
       - .:/app
-    command: sh -c "npm ci && npm run lint && npm test && npm run generate"
-    profiles: ['build']
-
-  # Web nova (app-nou/). node_modules, .nuxt i .output són volums amb nom: mai dins del repo.
-  permisos-nou:
-    image: node:26.13.0-bookworm
-    user: root
-    command: chown ${HOST_UID:-1000}:${HOST_GID:-1000} /app/node_modules /app/.nuxt /app/.output
-    volumes:
-      - nou-node-modules:/app/node_modules
-      - nou-nuxt:/app/.nuxt
-      - nou-output:/app/.output
-    profiles: ['build-nou']
-
-  build-nou:
-    image: node:26.13.0-bookworm
-    user: '${HOST_UID:-1000}:${HOST_GID:-1000}'
-    working_dir: /app
-    environment:
-      HOME: /tmp
-    volumes:
-      - ./app-nou:/app
-      - nou-node-modules:/app/node_modules
-      - nou-nuxt:/app/.nuxt
-      - nou-output:/app/.output
-    depends_on:
-      permisos-nou:
-        condition: service_completed_successfully
     command: sh -c "npm ci && npm run lint && npm run generate"
-    profiles: ['build-nou']
+    profiles: ['build']
 
   web:
     image: nginx:alpine
@@ -86,8 +58,3 @@ services:
     # (que recorre l'arrel del projecte) l'inclouria al bundle.
     command: sh -c "cp -r /work /tmp/validacio && cd /tmp/validacio && npm ci && npx playwright test $$PW_ARGS"
     profiles: ['validacio']
-
-volumes:
-  nou-node-modules:
-  nou-nuxt:
-  nou-output:
