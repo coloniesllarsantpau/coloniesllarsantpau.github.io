@@ -43,8 +43,20 @@ jobs:
       - name: Generate 📦
         run: npm run generate
 
+      - name: Check output ✅
+        run: |
+          [ -f docs/CNAME ] || { echo "falta docs/CNAME"; exit 1; }
+          [ "$(tr -d '\n' < docs/CNAME)" = "coloniesllarsantpau.com" ] || { echo "docs/CNAME no conté el domini esperat"; exit 1; }
+          [ -f docs/200.html ] || { echo "falta docs/200.html"; exit 1; }
+          [ -f docs/index.html ] || { echo "falta docs/index.html"; exit 1; }
+          for route in lacasa serveis excursions fotos collaboradors contacte; do
+            [ -f "docs/$route/index.html" ] || { echo "falta docs/$route/index.html"; exit 1; }
+          done
+          size_kb=$(du -sk docs | cut -f1)
+          [ "$size_kb" -lt $((1024 * 1024)) ] || { echo "docs pesa ${size_kb} KB (límit 1 GB)"; exit 1; }
+
       - name: Upload output 📤
-        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: docs
           path: docs
