@@ -13,6 +13,7 @@ const GENERATED = [/^_nuxt\//, /^sw\.js$/];
 // Diferències acceptades, cadascuna amb el motiu. Una diferència que no consti aquí fa fallar la prova,
 // i una entrada que ja no sigui una diferència, també.
 const HTML_SHELL = 'HTML generat pel build: enllaça els actius de _nuxt/ i el text es compara a text.spec.js';
+const NO_METADATA = 'sense les metadades EXIF/XMP (càmera, sèrie de l\'objectiu); els píxels són idèntics';
 const ALLOWED_DIFFERENCES = {
   '200.html': HTML_SHELL,
   'index.html': HTML_SHELL,
@@ -22,6 +23,14 @@ const ALLOWED_DIFFERENCES = {
   'fotos/index.html': HTML_SHELL,
   'collaboradors/index.html': HTML_SHELL,
   'contacte/index.html': HTML_SHELL,
+  'photos/Llar_Sant_Pau_Bany_Habitacio.webp': NO_METADATA,
+  'photos/Llar_Sant_Pau_Bany_Habitacio_26.webp': NO_METADATA,
+  'photos/Llar_Sant_Pau_Bany_Habitacio_Minusvalids.webp': NO_METADATA,
+  'photos/Llar_Sant_Pau_Bany_Infermeria.webp': NO_METADATA,
+  'photos/Llar_Sant_Pau_Banys_Noies.webp': NO_METADATA,
+  'photos/Llar_Sant_Pau_Sala_Primer_Pis.webp': NO_METADATA,
+  'photos/Llar_Sant_Pau_Sala_Segon_Pis.webp': NO_METADATA,
+  'photos/map.png': NO_METADATA,
 };
 
 function listFiles(dir, prefix = '') {
