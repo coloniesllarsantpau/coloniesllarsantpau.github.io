@@ -4,13 +4,14 @@
     <SpText class="contact__subtitle font-medium" :importance="6" size="xs">{{ contact.subtitle }}</SpText>
     <div class="content main content--mq">
       <div class="contact__info">
-        <SpText class="font-medium" :importance="6" size="xs">{{ contact.name }}</SpText>
-        <SpText class="font-medium" :importance="6" size="xs">
+        <SpText v-if="contact.name" class="font-medium" :importance="6" size="xs">{{ contact.name }}</SpText>
+        <SpText v-if="contact.email" class="font-medium" :importance="6" size="xs">
           <a :href="`mailto:${contact.email}`">{{ contact.email }}</a>
         </SpText>
-        <SpText class="font-medium">
-          <a :href="`tel:${contact.phones[0]}`">{{ contact.phones[0] }}</a> /
-          <a :href="`tel:${contact.phones[1]}`">{{ contact.phones[1] }}</a>
+        <SpText v-if="contact.phones.length" class="font-medium">
+          <template v-for="(phone, index) in contact.phones" :key="phone.href">
+            <template v-if="index > 0"> / </template><a :href="phone.href">{{ phone.text }}</a>
+          </template>
         </SpText>
       </div>
     </div>
