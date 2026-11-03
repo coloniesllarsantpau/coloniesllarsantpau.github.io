@@ -31,6 +31,18 @@ async function loadEverything(page) {
   await page.waitForLoadState('networkidle');
 }
 
+// Treu de la pàgina el bloc de contacte de /contacte (`.contact__info`) i la columna «Contacte» del peu (l'última de
+// `.links`), perquè les dades de contacte ja no són les de la referència i les cobreix contacte.spec.js. Es fa igual a la
+// web i a la referència. Amb `remove` s'esborren del DOM (perquè tampoc es llegeixin els <a>); si no, s'amaguen.
+async function hideContactData(page, { remove = false } = {}) {
+  const selectors = ['.contact__info', 'footer .links__item:last-child'];
+  if (remove) {
+    await page.evaluate((list) => list.forEach((sel) => document.querySelectorAll(sel).forEach((el) => el.remove())), selectors);
+  } else {
+    await page.addStyleTag({ content: `${selectors.join(', ')} { display: none !important; }` });
+  }
+}
+
 // Tolerància de la comparació visual: un píxel compta com a diferent si el color s'allunya més
 // de 0,1 (escala de pixelmatch, 0-1) i es tolera fins a un 0,5 % de píxels diferents.
 const PIXEL_THRESHOLD = 0.1;
@@ -55,4 +67,4 @@ async function openContext(browser, testInfo, baseURL) {
 const CURRENT_DIR = '/fitxers/nova';
 const REFERENCE_DIR = '/fitxers/referencia';
 
-module.exports = { CURRENT_DIR, REFERENCE_DIR, watchPage, loadEverything, openContext, REF_URL, PIXEL_THRESHOLD, MAX_DIFFERENT_RATIO };
+module.exports = { CURRENT_DIR, REFERENCE_DIR, watchPage, loadEverything, hideContactData, openContext, REF_URL, PIXEL_THRESHOLD, MAX_DIFFERENT_RATIO };

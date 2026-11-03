@@ -1,6 +1,6 @@
 const { test, expect } = require('@playwright/test');
 const routes = require('./routes');
-const { loadEverything, openContext, REF_URL } = require('./helpers');
+const { loadEverything, hideContactData, openContext, REF_URL } = require('./helpers');
 
 // Títol i text visible de la pàgina, línia a línia i sense espais de més.
 async function visibleText(browser, testInfo, base, route) {
@@ -10,6 +10,7 @@ async function visibleText(browser, testInfo, base, route) {
   await loadEverything(page);
   // «Item 1 of 1» del carrusel de la referència: només per a lectors de pantalla (retallat a 1 px), no es veu.
   await page.addStyleTag({ content: '.hooper-sr-only { display: none !important; }' });
+  await hideContactData(page);
   const title = await page.title();
   const text = await page.evaluate(() => document.body.innerText);
   await context.close();

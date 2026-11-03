@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 const { PNG } = require('pngjs');
 const pixelmatch = require('pixelmatch');
 const routes = require('./routes');
-const { loadEverything, PIXEL_THRESHOLD, MAX_DIFFERENT_RATIO } = require('./helpers');
+const { loadEverything, hideContactData, PIXEL_THRESHOLD, MAX_DIFFERENT_RATIO } = require('./helpers');
 
 // Només la capçalera (menú) i el peu del layout, amb el contingut de les pàgines amagat; la pàgina
 // sencera es compara a visual.spec.js.
@@ -34,6 +34,7 @@ async function capture(browser, contextOptions, url) {
   // Sense el contingut de la pàgina, el peu queda a la mateixa posició a les dues webs; si no, la
   // posició fraccionària que li dona l'alçada del contingut de la referència canvia l'antialiasing.
   await page.addStyleTag({ content: '.main-section > :not(footer) { display: none !important; }' });
+  await hideContactData(page);
   const result = {};
   for (const [name, { selector }] of Object.entries(parts)) {
     const png = await page.locator(selector).first().screenshot({ animations: 'disabled', caret: 'hide' });

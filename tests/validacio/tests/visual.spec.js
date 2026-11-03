@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 const { PNG } = require('pngjs');
 const pixelmatch = require('pixelmatch');
 const routes = require('./routes');
-const { loadEverything } = require('./helpers');
+const { loadEverything, hideContactData } = require('./helpers');
 
 // Tolerància: un píxel compta com a diferent si el color s'allunya més de 0,1 (escala de
 // pixelmatch, 0-1) i es tolera fins a un 0,5 % de píxels diferents (antialiàsing, subpíxels).
@@ -18,6 +18,7 @@ async function capture(browser, contextOptions, url) {
   await page.goto(url);
   await loadEverything(page);
   await page.evaluate(() => document.fonts.ready);
+  await hideContactData(page);
   const png = await page.screenshot({ fullPage: true, animations: 'disabled', caret: 'hide' });
   await context.close();
   return PNG.sync.read(png);

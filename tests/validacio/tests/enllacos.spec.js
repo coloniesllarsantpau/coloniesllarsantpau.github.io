@@ -1,6 +1,6 @@
 const { test, expect } = require('@playwright/test');
 const routes = require('./routes');
-const { loadEverything, openContext, REF_URL } = require('./helpers');
+const { loadEverything, hideContactData, openContext, REF_URL } = require('./helpers');
 
 // Enllaços, marcs i formularis de la pàgina, en ordre i amb l'atribut tal com és al DOM (mailto:, tel:, Instagram, Google Maps...).
 async function destinations(browser, testInfo, base, route) {
@@ -8,6 +8,7 @@ async function destinations(browser, testInfo, base, route) {
   const page = await context.newPage();
   await page.goto(route);
   await loadEverything(page);
+  await hideContactData(page, { remove: true });
   const found = await page.evaluate(() => ({
     links: [...document.querySelectorAll('a')].map((a) => ({
       href: a.getAttribute('href'),
