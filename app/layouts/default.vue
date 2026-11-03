@@ -30,12 +30,14 @@
           </div>
           <div class="links__item">
             <SpText class="font-titles">Contacte</SpText>
-            <SpText class="font-sans"
-              ><a href="tel:654021143">654021143</a> / <a href="tel:972 721 270">972 721 270</a></SpText
-            >
-            <SpText class="font-sans"
-              ><a href="mailto: info@coloniesllarsantpau.com">info@coloniesllarsantpau.com</a></SpText
-            >
+            <SpText v-if="contact.phones.length" class="font-sans">
+              <template v-for="(phone, index) in contact.phones" :key="phone.href">
+                <template v-if="index > 0"> / </template><a :href="phone.href">{{ phone.text }}</a>
+              </template>
+            </SpText>
+            <SpText v-if="contact.email" class="font-sans">
+              <a :href="`mailto:${contact.email}`">{{ contact.email }}</a>
+            </SpText>
           </div>
         </section>
         <section class="content copyright">
@@ -50,6 +52,8 @@
 </template>
 
 <script setup lang="ts">
+import { contact } from '~/data/contact';
+
 const route = useRoute();
 
 const navigationItems = [
