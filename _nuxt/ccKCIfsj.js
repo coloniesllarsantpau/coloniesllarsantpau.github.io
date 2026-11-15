@@ -1,0 +1,1 @@
+var e={title:`Contacte`,subtitle:`Per reserves i més informació contacteu amb:`,name:`Albert Roca Comellas`,email:`info@coloniesllarsantpau.com`,phones:[{text:`649 57 20 88`,href:`tel:+34649572088`},{text:`972 721 270`,href:`tel:+34972721270`}]};export{e as t};
