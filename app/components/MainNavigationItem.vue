@@ -37,6 +37,13 @@ $color-hover: var(--color-secondary);
 
     img {
       height: 100%;
+
+      // L'SVG del logo no té mida pròpia: sense mida explícita, Firefox el deixa a 0 px.
+      @include large-screen {
+        width: 70px;
+        height: 70px;
+        max-width: none;
+      }
     }
   }
 
