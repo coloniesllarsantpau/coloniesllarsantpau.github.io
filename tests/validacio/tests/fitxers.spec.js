@@ -12,7 +12,7 @@ const GENERATED = [/^_nuxt\//, /^sw\.js$/];
 
 // Diferències acceptades, cadascuna amb el motiu. Una diferència que no consti aquí fa fallar la prova,
 // i una entrada que ja no sigui una diferència, també.
-const HTML_SHELL = 'HTML generat pel build: enllaça els actius de _nuxt/ i el text es compara a text.spec.js';
+const HTML_SHELL = 'HTML generat pel build: enllaça els actius de _nuxt/ i el text es compara a text.spec.js i les metadades (títol, descripció, canonical, Open Graph i JSON-LD) a seo.spec.js';
 const NO_METADATA = 'sense les metadades EXIF/XMP (càmera, sèrie de l\'objectiu); els píxels són idèntics';
 const ALLOWED_DIFFERENCES = {
   '200.html': HTML_SHELL,
@@ -23,6 +23,9 @@ const ALLOWED_DIFFERENCES = {
   'fotos/index.html': HTML_SHELL,
   'collaboradors/index.html': HTML_SHELL,
   'contacte/index.html': HTML_SHELL,
+  'robots.txt': 'fitxer nou: permet tot i apunta al sitemap; el cobreix seo.spec.js',
+  'sitemap.xml': 'fitxer nou: les 7 URL canòniques; el cobreix seo.spec.js',
+  'compartir/llar-sant-pau.jpg': 'fitxer nou: imatge per compartir en xarxes (1200x630); la cobreix seo.spec.js',
   'photos/Llar_Sant_Pau_Bany_Habitacio.webp': NO_METADATA,
   'photos/Llar_Sant_Pau_Bany_Habitacio_26.webp': NO_METADATA,
   'photos/Llar_Sant_Pau_Bany_Habitacio_Minusvalids.webp': NO_METADATA,

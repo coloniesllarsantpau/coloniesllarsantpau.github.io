@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 const routes = require('./routes');
 const { loadEverything, hideContactData, openContext, REF_URL } = require('./helpers');
 
-// Títol i text visible de la pàgina, línia a línia i sense espais de més.
+// Text visible de la pàgina, línia a línia i sense espais de més.
 async function visibleText(browser, testInfo, base, route) {
   const context = await openContext(browser, testInfo, base);
   const page = await context.newPage();
@@ -11,14 +11,14 @@ async function visibleText(browser, testInfo, base, route) {
   // «Item 1 of 1» del carrusel de la referència: només per a lectors de pantalla (retallat a 1 px), no es veu.
   await page.addStyleTag({ content: '.hooper-sr-only { display: none !important; }' });
   await hideContactData(page);
-  const title = await page.title();
+  // El títol no es compara amb la referència: ara cada ruta té el seu i el cobreix seo.spec.js.
   const text = await page.evaluate(() => document.body.innerText);
   await context.close();
   const lines = text
     .split('\n')
     .map((line) => line.replace(/\s+/g, ' ').trim())
     .filter(Boolean);
-  return { title, lines };
+  return { lines };
 }
 
 for (const route of routes) {
