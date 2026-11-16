@@ -8,7 +8,7 @@
       <footer class="footer">
         <section class="content links">
           <div class="links__item">
-            <img class="footer-logo" src="/logo/logo-circle-text.png" />
+            <img class="footer-logo" src="/logo/logo-circle-text.png" alt="Llar Sant Pau" />
           </div>
           <div class="links__item">
             <SpText class="font-titles">Info</SpText>
@@ -43,7 +43,9 @@
         <section class="content copyright">
           <NuxtLink to="/">© 2021 LLAR SANT PAU</NuxtLink>
           <div class="social">
-            <a href="https://www.instagram.com/llarsantpau"><i class="ph-3x ph-instagram-logo" /></a>
+            <a href="https://www.instagram.com/llarsantpau" aria-label="Instagram de Llar Sant Pau"
+              ><i class="ph-3x ph-instagram-logo"
+            /></a>
           </div>
         </section>
       </footer>
@@ -60,7 +62,13 @@ const navigationItems = [
   { name: 'La casa', url: '/lacasa', containerClass: 'blue' },
   { name: 'Serveis', url: '/serveis', containerClass: 'red' },
   { name: 'Excursions', url: '/excursions', containerClass: 'green' },
-  { name: '', url: '/', imageUrl: '/logo/logo-inverted.svg', containerClass: 'homepage blue' },
+  {
+    name: '',
+    url: '/',
+    imageUrl: '/logo/logo-inverted.svg',
+    alt: 'Llar Sant Pau, inici',
+    containerClass: 'homepage blue',
+  },
   { name: 'Fotos', url: '/fotos', containerClass: 'yellow' },
   { name: 'Col·laboradors', url: '/collaboradors', containerClass: 'red' },
   { name: 'Contacte', url: '/contacte', containerClass: 'yellow' },

@@ -7,13 +7,13 @@
         <div v-for="service in services" :key="service.title">
           <div class="services__grid-item">
             <div class="services__grid-item__icon">
-              <img :src="service.icon" />
+              <img :src="service.icon" alt="" />
             </div>
             <SpText class="font-medium" :importance="6" size="xs">{{ service.title }}</SpText>
           </div>
         </div>
       </div>
-      <img class="services-background" src="/services-background.svg" />
+      <img class="services-background" src="/services-background.svg" alt="" />
     </div>
   </section>
 </template>

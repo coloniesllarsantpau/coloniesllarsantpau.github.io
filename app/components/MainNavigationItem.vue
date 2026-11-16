@@ -1,14 +1,14 @@
 <template>
   <NuxtLink :to="item.url" :class="{ home: item.url === '/' }" class="main-navigation-item">
     <div class="main-navigation-item__content">
-      <img v-if="item.imageUrl" :src="item.imageUrl" />
+      <img v-if="item.imageUrl" :src="item.imageUrl" :alt="item.alt" />
       <span v-else>{{ item.name }}</span>
     </div>
   </NuxtLink>
 </template>
 
 <script setup lang="ts">
-defineProps<{ item: { name: string; url: string; imageUrl?: string } }>();
+defineProps<{ item: { name: string; url: string; imageUrl?: string; alt?: string } }>();
 </script>
 
 <style lang="scss" scoped>

@@ -75,7 +75,7 @@
           </div>
         </template>
         <template #right>
-          <img class="thehouse__description-background" src="/thehouse-background.svg" />
+          <img class="thehouse__description-background" src="/thehouse-background.svg" alt="" />
         </template>
       </SpTextArticle>
     </div>

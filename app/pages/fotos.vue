@@ -10,7 +10,7 @@
           :class="item.name"
           :style="{ gridArea: item.name }"
         >
-          <img class="photos__grid-item__image" :src="item.src" />
+          <img class="photos__grid-item__image" :src="item.src" :alt="item.alt" />
           <SpText class="font-sans" :importance="5" size="xxs">{{ index + 1 }}. {{ item.description }}</SpText>
         </div>
       </div>

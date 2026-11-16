@@ -4,7 +4,11 @@
     <div class="slider">
       <div class="slide">
         <SpText class="slide__title font-titles fade-in-text" :importance="1" size="xxl">{{ home.title }}</SpText>
-        <img class="fade-in-image" src="/photos/Llar_Sant_Pau_Exterior_Masia.webp" />
+        <img
+          class="fade-in-image"
+          src="/photos/Llar_Sant_Pau_Exterior_Masia.webp"
+          alt="Façana de pedra de la masia de la casa de colònies Llar Sant Pau, amb el campanar al darrere"
+        />
       </div>
     </div>
     <div class="content content--mq">
@@ -16,17 +20,20 @@
             </p>
           </template>
           <template #right>
-            <img src="/photos/Llar_Sant_Pau_Menjador.webp" />
+            <img
+              src="/photos/Llar_Sant_Pau_Menjador.webp"
+              alt="Menjador annex amb una taula llarga de fusta i l'altell"
+            />
           </template>
         </SpTextArticle>
         <SpTextArticle :gap="false" highlight="left">
           <template #left>
-            <img src="/photos/Llar_Sant_Pau_Piscina.webp" />
+            <img src="/photos/Llar_Sant_Pau_Piscina.webp" alt="Piscina envoltada de gespa, amb el bosc al fons" />
           </template>
           <template #right>
             <div class="small-houses__wrapper">
               <div class="small-hosues">
-                <img v-for="index in 10" :key="index" src="/logo/logo-without-circle.svg" />
+                <img v-for="index in 10" :key="index" src="/logo/logo-without-circle.svg" alt="" />
               </div>
             </div>
           </template>
@@ -42,14 +49,17 @@
             </div>
           </template>
           <template #right>
-            <img src="/photos/Llar_Sant_Pau_Entorns.webp" />
+            <img src="/photos/Llar_Sant_Pau_Entorns.webp" alt="Prat i muntanyes dels entorns de la casa" />
           </template>
         </SpTextArticle>
         <h2 class="on-som">{{ home.whereWeAre }}</h2>
       </section>
     </div>
     <a :href="home.mapUrl" target="_blank">
-      <img src="/photos/map.png" />
+      <img
+        src="/photos/map.png"
+        alt="Mapa amb la ubicació de la casa de colònies Llar Sant Pau a Sant Pau de Segúries"
+      />
     </a>
   </section>
 </template>
