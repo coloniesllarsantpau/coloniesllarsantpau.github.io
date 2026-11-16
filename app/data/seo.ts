@@ -9,7 +9,7 @@ export const SHARE_IMAGE = {
   path: '/compartir/llar-sant-pau.jpg',
   width: 1200,
   height: 630,
-  alt: 'Exterior de la masia de la casa de colònies Llar Sant Pau',
+  alt: 'Façana de pedra de la masia de la casa de colònies Llar Sant Pau, amb el campanar al darrere',
 };
 
 export interface RouteSeo {
