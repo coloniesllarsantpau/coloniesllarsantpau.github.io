@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import tailwindcss from '@tailwindcss/vite';
-import { seoHead } from './app/data/seo';
+import { lodgingBusinessJsonLd, seoHead } from './app/data/seo';
 
 // CSP per <meta> (Pages no deixa posar capçaleres). Els scripts en línia de Nuxt (importmap i window.__NUXT__)
 // canvien a cada build: se'n calcula el hash a l'HTML generat en lloc de permetre 'unsafe-inline'.
@@ -49,6 +49,11 @@ function injectSeo(html: string, route: string): string {
     ...head.meta.map((meta) => renderTag('meta', meta)),
     ...head.link.map((link) => renderTag('link', link)),
   ];
+  if (path === '/') {
+    // Sense `<` dins del JSON, perquè no pugui tancar l'etiqueta.
+    const json = JSON.stringify(lodgingBusinessJsonLd()).replace(/</g, '\\u003c');
+    tags.push(`<script type="application/ld+json">${json}</script>`);
+  }
   return html.replace(/<title>[\s\S]*?<\/title>/, () => tags.join(''));
 }
 
