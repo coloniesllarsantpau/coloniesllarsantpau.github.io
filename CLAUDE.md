@@ -52,6 +52,16 @@ El projecte no té tests unitaris: les proves són les de `tests/validacio/`.
 - `tests/validacio/` i `.referencia/` queden fora de `npm run lint` (`.prettierignore` i `eslint.config.mjs`).
 - El contenidor de Playwright treballa en una còpia de `tests/validacio/` dins del contenidor: el directori es munta només de lectura i el seu `node_modules` no queda dins del repo.
 
+## SEO
+
+- Font única: `app/data/seo.ts` (títol de fins a 60 caràcters, descripció de 70 a 160 i ruta de les 7 rutes; dades del negoci i JSON-LD `LodgingBusiness`, només a la portada i només amb dades no discutides: sense capacitat ni adreça completa).
+- Com es generen: la web és `ssr: false` i l'HTML de totes les rutes és el mateix i buit, per això el hook `prerender:generate` de `nuxt.config.ts` injecta a cada HTML `<title>`, `description`, `canonical`, Open Graph, `twitter:card` i el JSON-LD, **abans** de calcular la CSP (el JSON-LD és un `<script>` en línia i en queda el hash). Cada pàgina fa també `useHead(seoHead('/ruta'))`, perquè el títol canviï en navegar i les etiquetes substitueixin les injectades. `200.html` té el títol i la descripció de la portada, sense `canonical` ni `og:url`.
+- URL canònica: `https://coloniesllarsantpau.com/<ruta>/`, amb barra final.
+- Fitxers a `public/`: `robots.txt`, `sitemap.xml` (les 7 URL canòniques) i `compartir/llar-sant-pau.jpg` (1200×630, retallada de la foto de la portada, sense metadades). En afegir una ruta, cal afegir-la a `seoRoutes`, al sitemap, a `routes.js` i a `nitro.prerender.routes`.
+- `alt`: descriptiu a les fotos de contingut (a `/fotos` ve del camp `alt` de `app/data/photos.ts`, sense repeticions) i `alt=""` a les decoratives; el logo del menú pren el nom de l'`alt` de la imatge i l'enllaç d'Instagram té `aria-label`.
+- `tests/validacio/tests/seo.spec.js` cobreix, per ruta, títol, descripció, `canonical` i `og:` exactes i únics (a l'HTML sense JavaScript, al navegador i en navegar), el JSON-LD, `robots.txt`, `sitemap.xml`, la imatge i que cap `<img>` no quedi sense `alt`. Té els valors escrits a la prova: **en canviar un text a `seo.ts` cal canviar-lo també a `seo.spec.js`**. `text.spec.js` ja no compara el títol amb la referència, i `fitxers.spec.js` accepta els tres fitxers nous.
+- Pendent (canvia el que es veu, no descartat): `lang="ca"`, `h1` i jerarquia de títols, pàgines noves. Cal que l'Albert validi els textos `alt` i la imatge per compartir abans de publicar.
+
 ## Workflow (CI)
 
 En un push a `master`, el pas Deploy publica `docs/` a la branca `gh-pages`, que és la font de Pages. `public/CNAME` ha de ser a la sortida: `peaceiris` esborra el que no publica.
