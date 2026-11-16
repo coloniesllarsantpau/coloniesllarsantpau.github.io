@@ -19,7 +19,10 @@
 </template>
 
 <script setup lang="ts">
+import { seoHead } from '~/data/seo';
 import { services, servicesPage } from '~/data/services';
+
+useHead(seoHead('/serveis'));
 </script>
 
 <style lang="scss" scoped>

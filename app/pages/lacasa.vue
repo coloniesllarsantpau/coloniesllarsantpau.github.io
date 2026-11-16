@@ -82,6 +82,12 @@
   </section>
 </template>
 
+<script setup lang="ts">
+import { seoHead } from '~/data/seo';
+
+useHead(seoHead('/lacasa'));
+</script>
+
 <style lang="scss" scoped>
 .thehouse {
   background: var(--color-primary);

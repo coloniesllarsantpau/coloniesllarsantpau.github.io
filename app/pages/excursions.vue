@@ -10,7 +10,10 @@
 </template>
 
 <script setup lang="ts">
+import { seoHead } from '~/data/seo';
 import { hikes, hikesPage } from '~/data/hikes';
+
+useHead(seoHead('/excursions'));
 </script>
 
 <style lang="scss" scoped>

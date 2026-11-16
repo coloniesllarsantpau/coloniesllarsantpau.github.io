@@ -13,7 +13,10 @@
 </template>
 
 <script setup lang="ts">
+import { seoHead } from '~/data/seo';
 import { collaborators, collaboratorsPage } from '~/data/collaborators';
+
+useHead(seoHead('/collaboradors'));
 </script>
 
 <style lang="scss" scoped>

@@ -1,6 +1,7 @@
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import tailwindcss from '@tailwindcss/vite';
+import { seoHead } from './app/data/seo';
 
 // CSP per <meta> (Pages no deixa posar capçaleres). Els scripts en línia de Nuxt (importmap i window.__NUXT__)
 // canvien a cada build: se'n calcula el hash a l'HTML generat en lloc de permetre 'unsafe-inline'.
@@ -19,6 +20,36 @@ function buildCsp(html: string): string {
     "base-uri 'self'",
     "form-action 'self'",
   ].join('; ');
+}
+
+function escapeAttribute(value: string): string {
+  return value.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function renderTag(name: string, attributes: Record<string, string>): string {
+  const rendered = Object.entries(attributes).map(([key, value]) => ` ${key}="${escapeAttribute(value)}"`);
+  return `<${name}${rendered.join('')}>`;
+}
+
+// Ruta amb metadades pròpies, o undefined per al fallback (200.html).
+function seoPath(route: string): string | undefined {
+  if (route === '/200.html') return undefined;
+  if (route === '/index.html') return '/';
+  return route.length > 1 ? route.replace(/\/$/, '') : route;
+}
+
+// La web és ssr: false i l'HTML de totes les rutes és el mateix i buit: les metadades (les mateixes que fa servir
+// useHead a cada pàgina) s'injecten aquí perquè els cercadors i les xarxes que no executen JavaScript les vegin.
+// Substitueix el <title> genèric. Cal fer-ho abans de calcular la CSP: el JSON-LD és un <script> en línia.
+function injectSeo(html: string, route: string): string {
+  const path = seoPath(route);
+  const head = seoHead(path);
+  const tags = [
+    `<title>${escapeAttribute(head.title)}</title>`,
+    ...head.meta.map((meta) => renderTag('meta', meta)),
+    ...head.link.map((link) => renderTag('link', link)),
+  ];
+  return html.replace(/<title>[\s\S]*?<\/title>/, () => tags.join(''));
 }
 
 export default defineNuxtConfig({
@@ -59,6 +90,7 @@ export default defineNuxtConfig({
     'nitro:init': (nitro) => {
       nitro.hooks.hook('prerender:generate', (route) => {
         if (!route.fileName?.endsWith('.html') || !route.contents) return;
+        route.contents = injectSeo(route.contents, route.route);
         const csp = `<meta http-equiv="Content-Security-Policy" content="${buildCsp(route.contents)}">`;
         // Just després de <meta charset>, abans de qualsevol script.
         route.contents = route.contents.replace(/(<meta charset="utf-8">)/, `$1${csp}`);

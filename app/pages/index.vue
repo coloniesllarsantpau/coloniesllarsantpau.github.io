@@ -55,7 +55,10 @@
 </template>
 
 <script setup lang="ts">
+import { seoHead } from '~/data/seo';
 import { home } from '~/data/home';
+
+useHead(seoHead('/'));
 </script>
 
 <style lang="scss" scoped>

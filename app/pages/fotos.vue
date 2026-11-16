@@ -19,7 +19,10 @@
 </template>
 
 <script setup lang="ts">
+import { seoHead } from '~/data/seo';
 import { photos, photosPage } from '~/data/photos';
+
+useHead(seoHead('/fotos'));
 </script>
 
 <style lang="scss" scoped>
