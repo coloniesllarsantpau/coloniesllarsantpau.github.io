@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@tailwindcss/typography": "0.5.20",
-    "@tailwindcss/vite": "4.3.3",
+    "@tailwindcss/vite": "4.3.5",
     "nuxt": "4.6.3",
     "sass": "1.107.1",
     "tailwindcss": "4.3.3",
