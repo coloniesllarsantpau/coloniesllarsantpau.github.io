@@ -69,6 +69,8 @@ export const seoRoutes: RouteSeo[] = [
 export const business = {
   name: SITE_NAME,
   locality: 'Sant Pau de Segúries',
+  // Capacitat oficial confirmada per la casa el 2026-11-23.
+  capacity: 76,
   instagram: 'https://www.instagram.com/llarsantpau',
 };
 
@@ -111,7 +113,7 @@ export function seoHead(path?: string): SeoHead {
   return { title: seo.title, meta, link };
 }
 
-// Dades estructurades de la portada. Només dades no discutides: sense capacitat ni adreça completa.
+// Dades estructurades de la portada. Només dades confirmades: sense adreça completa fins que la casa la fixi.
 export function lodgingBusinessJsonLd() {
   return {
     '@context': 'https://schema.org',
@@ -122,6 +124,7 @@ export function lodgingBusinessJsonLd() {
     telephone: contact.phones.map((phone) => phone.href.replace(/^tel:/, '')),
     ...(contact.email ? { email: contact.email } : {}),
     sameAs: [business.instagram],
+    maximumAttendeeCapacity: business.capacity,
     address: { '@type': 'PostalAddress', addressLocality: business.locality },
   };
 }

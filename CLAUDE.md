@@ -54,7 +54,7 @@ El projecte no té tests unitaris: les proves són les de `tests/validacio/`.
 
 ## SEO
 
-- Font única: `app/data/seo.ts` (títol de fins a 60 caràcters, descripció de 70 a 160 i ruta de les 7 rutes; dades del negoci i JSON-LD `LodgingBusiness`, només a la portada i només amb dades no discutides: sense capacitat ni adreça completa).
+- Font única: `app/data/seo.ts` (títol de fins a 60 caràcters, descripció de 70 a 160 i ruta de les 7 rutes; dades del negoci i JSON-LD `LodgingBusiness`, només a la portada i només amb dades confirmades: capacitat de 76 places, confirmada per la casa el 2026-11-23, i sense adreça completa).
 - Com es generen: la web és `ssr: false` i l'HTML de totes les rutes és el mateix i buit, per això el hook `prerender:generate` de `nuxt.config.ts` injecta a cada HTML `<title>`, `description`, `canonical`, Open Graph, `twitter:card` i el JSON-LD, **abans** de calcular la CSP (el JSON-LD és un `<script>` en línia i en queda el hash). Cada pàgina fa també `useHead(seoHead('/ruta'))`, perquè el títol canviï en navegar i les etiquetes substitueixin les injectades. `200.html` té el títol i la descripció de la portada, sense `canonical` ni `og:url`.
 - URL canònica: `https://coloniesllarsantpau.com/<ruta>/`, amb barra final.
 - Fitxers a `public/`: `robots.txt`, `sitemap.xml` (les 7 URL canòniques) i `compartir/llar-sant-pau.jpg` (1200×630, retallada de la foto de la portada, sense metadades). En afegir una ruta, cal afegir-la a `seoRoutes`, al sitemap, a `routes.js` i a `nitro.prerender.routes`.

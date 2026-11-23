@@ -169,6 +169,7 @@ test('la portada té el JSON-LD LodgingBusiness i les altres rutes no', async ({
       telephone: ['+34649572088', '+34972721270'],
       email: 'info@coloniesllarsantpau.com',
       sameAs: ['https://www.instagram.com/llarsantpau'],
+      maximumAttendeeCapacity: 76,
       address: { '@type': 'PostalAddress', addressLocality: 'Sant Pau de Segúries' },
     },
   ]);
